@@ -1,0 +1,4140 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cowboy & Birdbrain Vocabulary Arena 🤠🐦🧠</title>
+  
+  <!-- SEO Meta Tags -->
+  <meta name="description" content="Learn English words and idioms from the book Cowboy & Birdbrain through interactive quizzes and flashcards.">
+  
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Noto+Sans+KR:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+  
+  <style>
+    /* --- CSS Variables & Color Palette --- */
+    :root {
+      color-scheme: dark light;
+      
+      /* Color Tokens (Dark Theme Defaults) */
+      --bg-gradient-1: #0d0b21;
+      --bg-gradient-2: #160f30;
+      --bg-gradient-3: #080711;
+      --card-bg: rgba(26, 21, 44, 0.65);
+      --card-border: rgba(255, 255, 255, 0.08);
+      --text-primary: #f3f0ff;
+      --text-secondary: #b5aebf;
+      --accent-color: #8c52ff;
+      --accent-glow: rgba(140, 82, 255, 0.4);
+      --success-color: #00e676;
+      --success-bg: rgba(0, 230, 118, 0.15);
+      --error-color: #ff5252;
+      --error-bg: rgba(255, 82, 82, 0.15);
+      --star-color: #ffd600;
+      --shadow-color: rgba(0, 0, 0, 0.4);
+      
+      --font-english: 'Outfit', sans-serif;
+      --font-korean: 'Noto Sans KR', sans-serif;
+      
+      --radius-sm: 8px;
+      --radius-md: 16px;
+      --radius-lg: 24px;
+      
+      --transition-smooth: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+      --transition-spring: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+    
+    [data-theme="light"] {
+      --bg-gradient-1: #f5f3ff;
+      --bg-gradient-2: #ede9fe;
+      --bg-gradient-3: #f8fafc;
+      --card-bg: rgba(255, 255, 255, 0.75);
+      --card-border: rgba(140, 82, 255, 0.12);
+      --text-primary: #1e1b4b;
+      --text-secondary: #475569;
+      --accent-color: #7c3aed;
+      --accent-glow: rgba(124, 58, 237, 0.25);
+      --success-color: #10b981;
+      --success-bg: rgba(16, 185, 129, 0.12);
+      --error-color: #ef4444;
+      --error-bg: rgba(239, 68, 68, 0.12);
+      --shadow-color: rgba(124, 58, 237, 0.08);
+    }
+    
+    /* --- Base Resets & Layout --- */
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    
+    body {
+      font-family: var(--font-korean);
+      color: var(--text-primary);
+      min-block-size: 100vh;
+      display: flex;
+      flex-direction: column;
+      background: linear-gradient(135deg, var(--bg-gradient-1), var(--bg-gradient-2), var(--bg-gradient-3));
+      background-size: 400% 400%;
+      animation: gradientBg 15s ease infinite;
+      overflow-x: hidden;
+      line-height: 1.6;
+      padding-bottom: 40px;
+    }
+    
+    @keyframes gradientBg {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+    
+    h1, h2, h3, h4 {
+      font-weight: 700;
+    }
+    
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+    
+    button {
+      font-family: inherit;
+      cursor: pointer;
+      border: none;
+      background: none;
+      outline: none;
+    }
+    
+    /* Focus indicators */
+    button:focus-visible, 
+    input:focus-visible, 
+    select:focus-visible {
+      outline: 2px solid var(--accent-color);
+      outline-offset: 4px;
+    }
+    
+    /* --- Global Layout Wrapper --- */
+    .container {
+      width: 100%;
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 20px;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+    }
+    
+    /* --- Header Styles --- */
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 30px;
+      padding: 15px 24px;
+      background: var(--card-bg);
+      backdrop-filter: blur(16px);
+      border: 1px solid var(--card-border);
+      border-radius: var(--radius-md);
+      box-shadow: 0 8px 32px var(--shadow-color);
+    }
+    
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    
+    .brand-logo {
+      font-size: 2rem;
+    }
+    
+    .brand-title {
+      font-family: var(--font-english);
+      font-size: 1.35rem;
+      font-weight: 800;
+      letter-spacing: -0.5px;
+      background: linear-gradient(90deg, var(--accent-color), #c084fc);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    
+    .brand-subtitle {
+      font-size: 0.75rem;
+      color: var(--text-secondary);
+      font-weight: 400;
+    }
+    
+    .header-controls {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+    }
+    
+    .nav-tabs {
+      display: flex;
+      background: rgba(0, 0, 0, 0.2);
+      border-radius: var(--radius-sm);
+      padding: 4px;
+    }
+    
+    [data-theme="light"] .nav-tabs {
+      background: rgba(0, 0, 0, 0.05);
+    }
+    
+    .nav-tab-btn {
+      padding: 8px 16px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      border-radius: 6px;
+      color: var(--text-secondary);
+      transition: var(--transition-smooth);
+    }
+    
+    .nav-tab-btn.active {
+      color: var(--text-primary);
+      background: var(--accent-color);
+      box-shadow: 0 4px 12px var(--accent-glow);
+    }
+    
+    .theme-toggle-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      inline-size: 40px;
+      block-size: 40px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid var(--card-border);
+      color: var(--text-primary);
+      transition: var(--transition-spring);
+    }
+    
+    .theme-toggle-btn:hover {
+      transform: scale(1.1);
+      background: rgba(255, 255, 255, 0.1);
+    }
+    
+    /* --- Main Content Section --- */
+    main {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+    }
+    
+    .view-section {
+      display: none;
+      animation: fadeIn 0.4s ease-out;
+    }
+    
+    .view-section.active {
+      display: flex;
+      flex-direction: column;
+      flex: 1;
+    }
+    
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    
+    /* --- Dashboard (Main Settings) --- */
+    .dashboard-grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr;
+      gap: 24px;
+    }
+    
+    @media (max-width: 768px) {
+      .dashboard-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+    
+    .panel {
+      background: var(--card-bg);
+      backdrop-filter: blur(16px);
+      border: 1px solid var(--card-border);
+      border-radius: var(--radius-lg);
+      padding: 30px;
+      box-shadow: 0 10px 40px var(--shadow-color);
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+    }
+    
+    .panel-title {
+      font-size: 1.25rem;
+      border-bottom: 2px solid var(--card-border);
+      padding-bottom: 12px;
+      margin-bottom: 8px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    
+    /* Chapter Grid Selection */
+    .chapter-list {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 12px;
+      max-height: 380px;
+      overflow-y: auto;
+      padding-right: 6px;
+      scrollbar-width: thin;
+      scrollbar-color: var(--accent-color) transparent;
+    }
+    
+    .chapter-card {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 14px 20px;
+      border-radius: var(--radius-md);
+      background: rgba(255, 255, 255, 0.02);
+      border: 1px solid var(--card-border);
+      transition: var(--transition-spring);
+      text-align: left;
+    }
+    
+    .chapter-card:hover {
+      background: rgba(255, 255, 255, 0.06);
+      transform: translateX(4px);
+      border-color: var(--accent-color);
+    }
+    
+    .chapter-card.selected {
+      background: linear-gradient(90deg, rgba(140, 82, 255, 0.15), rgba(192, 132, 252, 0.05));
+      border-color: var(--accent-color);
+      box-shadow: inset 4px 0 0 var(--accent-color);
+    }
+    
+    .chapter-info {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+    
+    .chapter-name {
+      font-size: 0.95rem;
+      font-weight: 600;
+    }
+    
+    .chapter-count {
+      font-size: 0.75rem;
+      color: var(--text-secondary);
+    }
+    
+    /* Config Panel */
+    .config-group {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    
+    .config-label {
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: var(--text-secondary);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+    
+    .segmented-control {
+      display: flex;
+      background: rgba(0, 0, 0, 0.2);
+      border-radius: var(--radius-sm);
+      padding: 4px;
+      gap: 4px;
+    }
+    
+    [data-theme="light"] .segmented-control {
+      background: rgba(0, 0, 0, 0.05);
+    }
+    
+    .seg-btn {
+      flex: 1;
+      padding: 10px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      border-radius: 6px;
+      color: var(--text-secondary);
+      transition: var(--transition-smooth);
+    }
+    
+    .seg-btn.active {
+      color: var(--text-primary);
+      background: var(--accent-color);
+      box-shadow: 0 4px 10px var(--accent-glow);
+    }
+    
+    /* Action Buttons */
+    .start-btn {
+      width: 100%;
+      padding: 18px;
+      font-size: 1.1rem;
+      font-weight: 800;
+      border-radius: var(--radius-md);
+      background: linear-gradient(135deg, var(--accent-color), #a855f7);
+      color: white;
+      box-shadow: 0 8px 24px var(--accent-glow);
+      transition: var(--transition-spring);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      text-shadow: 0 2px 4px rgba(0,0,0,0.2);
+    }
+    
+    .start-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 12px 30px var(--accent-glow);
+      filter: brightness(1.1);
+    }
+    
+    .start-btn:active {
+      transform: translateY(1px);
+    }
+    
+    /* Starred Stats Card */
+    .stats-card {
+      background: linear-gradient(135deg, rgba(255, 214, 0, 0.08), rgba(255, 214, 0, 0.02));
+      border: 1px solid rgba(255, 214, 0, 0.2);
+      border-radius: var(--radius-md);
+      padding: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    
+    .stats-card-info {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+    
+    .stats-card-value {
+      font-family: var(--font-english);
+      font-size: 1.75rem;
+      font-weight: 800;
+      color: var(--star-color);
+    }
+    
+    .stats-card-btn {
+      padding: 8px 16px;
+      border-radius: var(--radius-sm);
+      background: var(--star-color);
+      color: #000;
+      font-weight: 700;
+      font-size: 0.85rem;
+      transition: var(--transition-spring);
+    }
+    
+    .stats-card-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 15px rgba(255, 214, 0, 0.4);
+    }
+    
+    /* File Drag & Drop */
+    .dropzone {
+      border: 2px dashed var(--card-border);
+      border-radius: var(--radius-md);
+      padding: 24px;
+      text-align: center;
+      transition: var(--transition-smooth);
+      background: rgba(255, 255, 255, 0.01);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+      cursor: pointer;
+    }
+    
+    .dropzone:hover, .dropzone.dragover {
+      border-color: var(--accent-color);
+      background: rgba(140, 82, 255, 0.04);
+    }
+    
+    .dropzone-icon {
+      font-size: 1.75rem;
+      color: var(--text-secondary);
+    }
+    
+    .dropzone-text {
+      font-size: 0.8rem;
+      color: var(--text-secondary);
+    }
+    
+    .dropzone-input {
+      display: none;
+    }
+    
+    /* --- Quiz Arena View --- */
+    .quiz-layout {
+      max-width: 680px;
+      margin: 0 auto;
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+    
+    .quiz-progress-bar-container {
+      width: 100%;
+      height: 6px;
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 3px;
+      overflow: hidden;
+    }
+    
+    .quiz-progress-bar {
+      height: 100%;
+      background: linear-gradient(90deg, var(--accent-color), #c084fc);
+      width: 0%;
+      transition: width 0.3s ease;
+    }
+    
+    .quiz-header-meta {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.85rem;
+      color: var(--text-secondary);
+    }
+    
+    .quiz-word-card {
+      background: var(--card-bg);
+      backdrop-filter: blur(16px);
+      border: 1px solid var(--card-border);
+      border-radius: var(--radius-lg);
+      padding: 40px 30px;
+      text-align: center;
+      box-shadow: 0 10px 40px var(--shadow-color);
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 20px;
+    }
+    
+    .word-card-actions {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      display: flex;
+      gap: 12px;
+    }
+    
+    .card-action-btn {
+      font-size: 1.25rem;
+      color: var(--text-secondary);
+      transition: var(--transition-spring);
+    }
+    
+    .card-action-btn:hover {
+      transform: scale(1.15);
+    }
+    
+    .card-action-btn.starred {
+      color: var(--star-color);
+    }
+    
+    .quiz-word {
+      font-family: var(--font-english);
+      font-size: 2.25rem;
+      font-weight: 800;
+      letter-spacing: -0.5px;
+      color: var(--text-primary);
+      margin-top: 10px;
+    }
+    
+    .quiz-chapter-tag {
+      font-size: 0.75rem;
+      background: rgba(140, 82, 255, 0.12);
+      border: 1px solid rgba(140, 82, 255, 0.2);
+      padding: 4px 12px;
+      border-radius: 12px;
+      color: var(--text-secondary);
+      font-weight: 600;
+    }
+    
+    .quiz-hint-btn {
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: var(--accent-color);
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      padding: 6px 12px;
+      border-radius: var(--radius-sm);
+      background: rgba(140, 82, 255, 0.05);
+      transition: var(--transition-smooth);
+    }
+    
+    .quiz-hint-btn:hover {
+      background: rgba(140, 82, 255, 0.1);
+    }
+    
+    .quiz-context-panel {
+      font-size: 0.95rem;
+      color: var(--text-secondary);
+      background: rgba(0, 0, 0, 0.15);
+      border-radius: var(--radius-md);
+      padding: 16px 20px;
+      width: 100%;
+      text-align: left;
+      display: none;
+      animation: slideDown 0.3s ease-out;
+      border-left: 3px solid var(--accent-color);
+      line-height: 1.5;
+    }
+    
+    [data-theme="light"] .quiz-context-panel {
+      background: rgba(0, 0, 0, 0.02);
+    }
+    
+    .quiz-context-panel.visible {
+      display: block;
+    }
+    
+    .quiz-context-panel strong {
+      color: var(--text-primary);
+      font-family: var(--font-english);
+    }
+    
+    @keyframes slideDown {
+      from { opacity: 0; transform: translateY(-5px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    
+    /* Options Container */
+    .quiz-options {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 12px;
+    }
+    
+    .option-btn {
+      width: 100%;
+      padding: 16px 20px;
+      border-radius: var(--radius-md);
+      background: var(--card-bg);
+      backdrop-filter: blur(16px);
+      border: 1px solid var(--card-border);
+      color: var(--text-primary);
+      text-align: left;
+      font-size: 1rem;
+      font-weight: 500;
+      box-shadow: 0 4px 15px var(--shadow-color);
+      transition: var(--transition-spring);
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      position: relative;
+    }
+    
+    .option-btn:hover:not(.selected):not(.correct):not(.incorrect):not(.disabled) {
+      transform: translateY(-2px);
+      border-color: var(--accent-color);
+      background: rgba(255, 255, 255, 0.02);
+      box-shadow: 0 6px 20px var(--accent-glow);
+    }
+    
+    .option-badge {
+      font-family: var(--font-english);
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid var(--card-border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: var(--text-secondary);
+      flex-shrink: 0;
+    }
+    
+    .option-text {
+      flex: 1;
+    }
+    
+    /* Correct/Incorrect Option States */
+    .option-btn.correct {
+      background: var(--success-bg);
+      border-color: var(--success-color);
+      color: var(--success-color);
+      animation: optionSuccess 0.4s ease-out;
+    }
+    
+    .option-btn.correct .option-badge {
+      background: var(--success-color);
+      color: black;
+      border-color: var(--success-color);
+    }
+    
+    .option-btn.incorrect {
+      background: var(--error-bg);
+      border-color: var(--error-color);
+      color: var(--error-color);
+    }
+    
+    .option-btn.incorrect .option-badge {
+      background: var(--error-color);
+      color: white;
+      border-color: var(--error-color);
+    }
+    
+    @keyframes optionSuccess {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.03); }
+      100% { transform: scale(1); }
+    }
+    
+    .quiz-controls {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 10px;
+    }
+    
+    .quiz-auto-advance {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.85rem;
+      color: var(--text-secondary);
+      cursor: pointer;
+    }
+    
+    .quiz-auto-advance input {
+      accent-color: var(--accent-color);
+      cursor: pointer;
+    }
+    
+    .next-btn {
+      padding: 12px 28px;
+      background: var(--accent-color);
+      color: white;
+      border-radius: var(--radius-sm);
+      font-weight: 700;
+      font-size: 0.95rem;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      box-shadow: 0 4px 15px var(--accent-glow);
+      transition: var(--transition-spring);
+    }
+    
+    .next-btn:hover:not(:disabled) {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px var(--accent-glow);
+    }
+    
+    .next-btn:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+      transform: none;
+      box-shadow: none;
+    }
+    
+    /* --- Flashcard View --- */
+    .flashcard-container {
+      max-width: 500px;
+      margin: 0 auto;
+      width: 100%;
+      perspective: 1000px;
+      block-size: 320px;
+    }
+    
+    .flashcard-inner {
+      width: 100%;
+      height: 100%;
+      position: relative;
+      transform-style: preserve-3d;
+      transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+      cursor: pointer;
+    }
+    
+    .flashcard-inner.flipped {
+      transform: rotateY(180deg);
+    }
+    
+    .flashcard-face {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      backface-visibility: hidden;
+      border-radius: var(--radius-lg);
+      background: var(--card-bg);
+      backdrop-filter: blur(16px);
+      border: 1px solid var(--card-border);
+      box-shadow: 0 10px 40px var(--shadow-color);
+      padding: 30px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      gap: 15px;
+      text-align: center;
+    }
+    
+    .flashcard-back {
+      transform: rotateY(180deg);
+      background: linear-gradient(135deg, var(--card-bg), rgba(140, 82, 255, 0.05));
+    }
+    
+    .flashcard-tap-hint {
+      font-size: 0.75rem;
+      color: var(--text-secondary);
+      position: absolute;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+    
+    .flashcard-buttons {
+      display: flex;
+      gap: 16px;
+      max-width: 500px;
+      margin: 20px auto 0;
+      width: 100%;
+    }
+    
+    .card-btn {
+      flex: 1;
+      padding: 16px;
+      border-radius: var(--radius-md);
+      font-weight: 700;
+      font-size: 0.95rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      transition: var(--transition-spring);
+    }
+    
+    .card-btn-again {
+      background: rgba(255, 82, 82, 0.1);
+      border: 1px solid var(--error-color);
+      color: var(--error-color);
+    }
+    
+    .card-btn-again:hover {
+      background: var(--error-color);
+      color: white;
+      transform: translateY(-2px);
+      box-shadow: 0 6px 15px rgba(255, 82, 82, 0.2);
+    }
+    
+    .card-btn-know {
+      background: rgba(0, 230, 118, 0.1);
+      border: 1px solid var(--success-color);
+      color: var(--success-color);
+    }
+    
+    .card-btn-know:hover {
+      background: var(--success-color);
+      color: black;
+      transform: translateY(-2px);
+      box-shadow: 0 6px 15px rgba(0, 230, 118, 0.2);
+    }
+    
+    /* --- Score Summary View --- */
+    .summary-card {
+      max-width: 600px;
+      margin: 0 auto;
+      width: 100%;
+      text-align: center;
+    }
+    
+    .score-circle-container {
+      position: relative;
+      width: 150px;
+      height: 150px;
+      margin: 0 auto 20px;
+    }
+    
+    .score-svg {
+      width: 100%;
+      height: 100%;
+      transform: rotate(-90deg);
+    }
+    
+    .score-circle-bg {
+      fill: none;
+      stroke: rgba(255, 255, 255, 0.05);
+      stroke-width: 10;
+    }
+    
+    [data-theme="light"] .score-circle-bg {
+      stroke: rgba(0, 0, 0, 0.05);
+    }
+    
+    .score-circle-val {
+      fill: none;
+      stroke: var(--accent-color);
+      stroke-width: 10;
+      stroke-dasharray: 440;
+      stroke-dashoffset: 440;
+      stroke-linecap: round;
+      transition: stroke-dashoffset 1s ease-in-out;
+    }
+    
+    .score-text {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    
+    .score-percentage {
+      font-family: var(--font-english);
+      font-size: 2rem;
+      font-weight: 800;
+    }
+    
+    .score-fraction {
+      font-size: 0.8rem;
+      color: var(--text-secondary);
+    }
+    
+    .summary-buttons {
+      display: flex;
+      gap: 12px;
+      margin-top: 15px;
+    }
+    
+    @media (max-width: 480px) {
+      .summary-buttons {
+        flex-direction: column;
+      }
+    }
+    
+    .summary-btn {
+      flex: 1;
+      padding: 14px;
+      border-radius: var(--radius-md);
+      font-weight: 700;
+      font-size: 0.9rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      border: 1px solid var(--card-border);
+      transition: var(--transition-spring);
+    }
+    
+    .summary-btn-primary {
+      background: var(--accent-color);
+      color: white;
+      border: none;
+      box-shadow: 0 4px 15px var(--accent-glow);
+    }
+    
+    .summary-btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px var(--accent-glow);
+    }
+    
+    .summary-btn-secondary {
+      background: rgba(255, 255, 255, 0.05);
+      color: var(--text-primary);
+    }
+    
+    .summary-btn-secondary:hover {
+      background: rgba(255, 255, 255, 0.1);
+      transform: translateY(-2px);
+    }
+    
+    /* Detailed Review Area */
+    .review-section-title {
+      font-size: 1.1rem;
+      margin: 30px 0 15px;
+      text-align: left;
+      border-left: 4px solid var(--accent-color);
+      padding-left: 10px;
+    }
+    
+    .review-list {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      max-height: 400px;
+      overflow-y: auto;
+      padding-right: 6px;
+      scrollbar-width: thin;
+      text-align: left;
+    }
+    
+    .review-list-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 12px 18px;
+      border-radius: var(--radius-sm);
+      background: rgba(255, 255, 255, 0.02);
+      border: 1px solid var(--card-border);
+      font-size: 0.9rem;
+    }
+    
+    .review-list-item.correct {
+      border-left: 4px solid var(--success-color);
+    }
+    
+    .review-list-item.incorrect {
+      border-left: 4px solid var(--error-color);
+    }
+    
+    .review-word-info {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+    
+    .review-english {
+      font-family: var(--font-english);
+      font-weight: 700;
+      color: var(--text-primary);
+    }
+    
+    .review-korean {
+      font-size: 0.8rem;
+      color: var(--text-secondary);
+    }
+    
+    .review-user-answer {
+      font-size: 0.8rem;
+      padding: 4px 8px;
+      border-radius: 4px;
+      font-weight: 600;
+    }
+    
+    .review-list-item.correct .review-user-answer {
+      color: var(--success-color);
+      background: var(--success-bg);
+    }
+    
+    .review-list-item.incorrect .review-user-answer {
+      color: var(--error-color);
+      background: var(--error-bg);
+    }
+    
+    /* --- Vocabulary List & Dictionary Tab --- */
+    .dictionary-controls {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr;
+      gap: 15px;
+      margin-bottom: 20px;
+    }
+    
+    @media (max-width: 768px) {
+      .dictionary-controls {
+        grid-template-columns: 1fr;
+      }
+    }
+    
+    .search-input-wrapper {
+      position: relative;
+    }
+    
+    .dictionary-search {
+      width: 100%;
+      padding: 14px 20px 14px 44px;
+      border-radius: var(--radius-md);
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      color: var(--text-primary);
+      font-size: 0.95rem;
+      transition: var(--transition-smooth);
+    }
+    
+    .dictionary-search:focus {
+      border-color: var(--accent-color);
+      box-shadow: 0 4px 15px var(--accent-glow);
+    }
+    
+    .search-icon {
+      position: absolute;
+      left: 18px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--text-secondary);
+      font-size: 1.1rem;
+      pointer-events: none;
+    }
+    
+    .dict-select {
+      padding: 14px 20px;
+      border-radius: var(--radius-md);
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      color: var(--text-primary);
+      font-size: 0.9rem;
+      cursor: pointer;
+      width: 100%;
+      outline: none;
+    }
+    
+    .dict-select:focus {
+      border-color: var(--accent-color);
+    }
+    
+    .starred-toggle-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 14px 20px;
+      border-radius: var(--radius-md);
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      color: var(--text-primary);
+      font-size: 0.9rem;
+      font-weight: 600;
+      transition: var(--transition-smooth);
+    }
+    
+    .starred-toggle-btn:hover {
+      background: rgba(255, 255, 255, 0.03);
+    }
+    
+    .starred-toggle-btn.active {
+      background: rgba(255, 214, 0, 0.08);
+      border-color: var(--star-color);
+      color: var(--star-color);
+    }
+    
+    /* Dictionary Cards Grid */
+    .dict-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 16px;
+      margin-bottom: 25px;
+    }
+    
+    .dict-card {
+      background: var(--card-bg);
+      backdrop-filter: blur(16px);
+      border: 1px solid var(--card-border);
+      border-radius: var(--radius-md);
+      padding: 20px;
+      box-shadow: 0 4px 15px var(--shadow-color);
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      position: relative;
+      transition: var(--transition-spring);
+    }
+    
+    .dict-card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 25px var(--shadow-color);
+      border-color: var(--accent-color);
+    }
+    
+    .dict-card-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-right: 50px;
+    }
+    
+    .dict-english {
+      font-family: var(--font-english);
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: var(--text-primary);
+    }
+    
+    .dict-actions {
+      position: absolute;
+      top: 16px;
+      right: 16px;
+      display: flex;
+      gap: 10px;
+    }
+    
+    .dict-action-btn {
+      font-size: 1.15rem;
+      color: var(--text-secondary);
+      transition: var(--transition-spring);
+    }
+    
+    .dict-action-btn:hover {
+      transform: scale(1.15);
+    }
+    
+    .dict-action-btn.starred {
+      color: var(--star-color);
+    }
+    
+    .dict-korean {
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: var(--text-primary);
+    }
+    
+    .dict-context {
+      font-size: 0.8rem;
+      color: var(--text-secondary);
+      background: rgba(0, 0, 0, 0.1);
+      padding: 10px 14px;
+      border-radius: var(--radius-sm);
+      border-left: 2px solid var(--accent-color);
+      margin-top: 5px;
+      line-height: 1.4;
+    }
+    
+    [data-theme="light"] .dict-context {
+      background: rgba(0, 0, 0, 0.02);
+    }
+    
+    .dict-chapter-tag {
+      align-self: flex-start;
+      font-size: 0.7rem;
+      background: rgba(255, 255, 255, 0.03);
+      padding: 2px 8px;
+      border-radius: 10px;
+      color: var(--text-secondary);
+      border: 1px solid var(--card-border);
+    }
+    
+    /* Pagination */
+    .pagination {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 10px;
+      margin-top: 10px;
+    }
+    
+    .page-btn {
+      padding: 10px 18px;
+      border-radius: var(--radius-sm);
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      color: var(--text-primary);
+      font-weight: 600;
+      font-size: 0.85rem;
+      transition: var(--transition-smooth);
+    }
+    
+    .page-btn:hover:not(:disabled) {
+      background: var(--accent-color);
+      color: white;
+      box-shadow: 0 4px 10px var(--accent-glow);
+    }
+    
+    .page-btn:disabled {
+      opacity: 0.3;
+      cursor: not-allowed;
+    }
+    
+    .page-info {
+      font-size: 0.85rem;
+      color: var(--text-secondary);
+    }
+    
+    /* Toast Notification */
+    .toast {
+      position: fixed;
+      bottom: 24px;
+      left: 50%;
+      transform: translateX(-50%) translateY(100px);
+      background: #1e1b4b;
+      color: white;
+      padding: 12px 24px;
+      border-radius: var(--radius-md);
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.5);
+      border: 1px solid var(--accent-color);
+      font-size: 0.9rem;
+      font-weight: 600;
+      z-index: 1000;
+      transition: transform 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275), opacity 0.3s;
+      opacity: 0;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    
+    .toast.visible {
+      transform: translateX(-50%) translateY(0);
+      opacity: 1;
+    }
+    
+    /* Footer */
+    footer {
+      text-align: center;
+      margin-top: 40px;
+      font-size: 0.8rem;
+      color: var(--text-secondary);
+    }
+    
+  </style>
+</head>
+<body>
+  
+  <div class="container">
+    
+    <!-- Header -->
+    <header>
+      <div class="brand">
+        <div class="brand-logo" aria-hidden="true">🤠🐦🧠</div>
+        <div>
+          <h1 class="brand-title">Vocabulary Arena</h1>
+          <div class="brand-subtitle">Cowboy & Birdbrain English Guide</div>
+        </div>
+      </div>
+      
+      <div class="header-controls">
+        <nav class="nav-tabs" aria-label="메인 메뉴">
+          <button type="button" class="nav-tab-btn active" id="tab-dashboard" onclick="switchView('dashboard')">학습하기</button>
+          <button type="button" class="nav-tab-btn" id="tab-dictionary" onclick="switchView('dictionary')">단어장</button>
+        </nav>
+        
+        <button type="button" class="theme-toggle-btn" id="theme-toggle" aria-label="다크/라이트 모드 토글">
+          <!-- Moon Icon SVG -->
+          <svg id="moon-icon" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path>
+          </svg>
+          <!-- Sun Icon SVG (hidden by default) -->
+          <svg id="sun-icon" style="display:none;" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="12" cy="12" r="5"></circle>
+            <path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42" stroke-linecap="round" stroke-linejoin="round"></path>
+          </svg>
+        </button>
+      </div>
+    </header>
+    
+    <!-- Main Content -->
+    <main>
+      
+      <!-- VIEW: DASHBOARD -->
+      <section class="view-section active" id="view-dashboard">
+        <div class="dashboard-grid">
+          
+          <!-- Chapter List Panel -->
+          <div class="panel">
+            <h2 class="panel-title">
+              <span>📖</span> 학습 챕터 선택
+            </h2>
+            <div class="chapter-list" id="chapter-list-container" role="group" aria-label="챕터 목록">
+              <!-- Dynamically populated -->
+            </div>
+            
+            <!-- File Drag and Drop -->
+            <label class="dropzone" id="file-dropzone" for="file-upload">
+              <span class="dropzone-icon">📥</span>
+              <span class="dropzone-text">다른 단어장 Markdown 파일 드래그 & 드롭 또는 클릭하여 업로드</span>
+              <span class="dropzone-text" style="font-size:0.7rem;opacity:0.8;">(| 단어/표현 | 뜻 | 책 속 문맥 & 예시 | 테이블 형식 지원)</span>
+              <input type="file" id="file-upload" class="dropzone-input" accept=".md,.txt" />
+            </label>
+          </div>
+          
+          <!-- Configuration Panel -->
+          <div class="panel">
+            <h2 class="panel-title">
+              <span>⚙️</span> 학습 설정
+            </h2>
+            
+            <!-- Starred stats summary -->
+            <div class="stats-card">
+              <div class="stats-card-info">
+                <span class="config-label" style="font-size:0.7rem;">북마크된 단어</span>
+                <span class="stats-card-value" id="starred-count-badge">0</span>
+              </div>
+              <button type="button" class="stats-card-btn" id="start-starred-btn" onclick="startStarredSession()">별표 단어만 학습</button>
+            </div>
+            
+            <!-- Questions Count selection -->
+            <div class="config-group">
+              <span class="config-label">문제 수</span>
+              <div class="segmented-control" role="radiogroup" aria-label="문제 수 선택">
+                <button type="button" class="seg-btn active" data-value="10" onclick="setConfig('questionCount', 10, this)">10</button>
+                <button type="button" class="seg-btn" data-value="20" onclick="setConfig('questionCount', 20, this)">20</button>
+                <button type="button" class="seg-btn" data-value="50" onclick="setConfig('questionCount', 50, this)">50</button>
+                <button type="button" class="seg-btn" data-value="all" onclick="setConfig('questionCount', 'all', this)">전체</button>
+              </div>
+            </div>
+            
+            <!-- Study Mode selection -->
+            <div class="config-group">
+              <span class="config-label">학습 모드</span>
+              <div class="segmented-control" role="radiogroup" aria-label="학습 모드 선택">
+                <button type="button" class="seg-btn active" data-value="quiz" onclick="setConfig('studyMode', 'quiz', this)">4지선다 퀴즈</button>
+                <button type="button" class="seg-btn" data-value="flashcard" onclick="setConfig('studyMode', 'flashcard', this)">플래시카드</button>
+              </div>
+            </div>
+            
+            <!-- Big Pulsing Start Button -->
+            <button type="button" class="start-btn" id="start-session-btn" onclick="startSession()">
+              <span>⚡</span> 학습 시작하기
+            </button>
+          </div>
+          
+        </div>
+      </section>
+      
+      <!-- VIEW: QUIZ ARENA -->
+      <section class="view-section" id="view-quiz">
+        <div class="quiz-layout">
+          
+          <div class="quiz-header-meta">
+            <span id="quiz-progress-text">문제 1 / 10</span>
+            <span id="quiz-score-live">정답: 0</span>
+          </div>
+          
+          <div class="quiz-progress-bar-container">
+            <div class="quiz-progress-bar" id="quiz-progress-indicator"></div>
+          </div>
+          
+          <!-- Word Card -->
+          <div class="quiz-word-card">
+            <div class="word-card-actions">
+              <button type="button" class="card-action-btn" id="quiz-tts-btn" title="발음 듣기" aria-label="영어 단어 발음 듣기">🔊</button>
+              <button type="button" class="card-action-btn" id="quiz-star-btn" title="북마크" aria-label="별표 북마크 추가">⭐</button>
+            </div>
+            
+            <span class="quiz-chapter-tag" id="quiz-chapter-tag">Chapter 1</span>
+            <div class="quiz-word" id="quiz-word-text">stared down at</div>
+            
+            <button type="button" class="quiz-hint-btn" id="quiz-hint-toggle" onclick="toggleQuizHint()">
+              <span>💡</span> 문맥 예문 보기
+            </button>
+            
+            <div class="quiz-context-panel" id="quiz-context-panel">
+              <!-- Context sentence loaded here -->
+            </div>
+          </div>
+          
+          <!-- 4 Multiple Choice Options -->
+          <div class="quiz-options" id="quiz-options-container">
+            <!-- Dynamically populated -->
+          </div>
+          
+          <!-- Bottom actions -->
+          <div class="quiz-controls">
+            <label class="quiz-auto-advance">
+              <input type="checkbox" id="auto-advance-chk" checked>
+              <span>정답 맞추면 1.5초 후 자동 다음 문제 이동</span>
+            </label>
+            
+            <button type="button" class="next-btn" id="quiz-next-btn" onclick="nextQuestion()" disabled>
+              <span>다음 문제</span>
+              <span>➔</span>
+            </button>
+          </div>
+          
+        </div>
+      </section>
+      
+      <!-- VIEW: FLASHCARD -->
+      <section class="view-section" id="view-flashcard">
+        <div class="quiz-layout">
+          <div class="quiz-header-meta">
+            <span id="card-progress-text">카드 1 / 10</span>
+          </div>
+          
+          <div class="quiz-progress-bar-container">
+            <div class="quiz-progress-bar" id="card-progress-indicator"></div>
+          </div>
+          
+          <div class="flashcard-container">
+            <div class="flashcard-inner" id="flashcard-inner" onclick="flipCard()">
+              
+              <!-- Card Front -->
+              <div class="flashcard-face flashcard-front">
+                <span class="quiz-chapter-tag" id="card-chapter-tag-front">Chapter 1</span>
+                <div class="quiz-word" id="card-word-text">stared down at</div>
+                <div class="flashcard-tap-hint">카드를 탭하여 뜻 확인</div>
+              </div>
+              
+              <!-- Card Back -->
+              <div class="flashcard-face flashcard-back">
+                <span class="quiz-chapter-tag" id="card-chapter-tag-back">Chapter 1</span>
+                <div class="quiz-korean" id="card-meaning-text">~을 내려다보았다</div>
+                <div class="dict-context" id="card-context-text" style="max-width:100%; text-align:left;">
+                  Birdbrain stared down at Cowboy from the ceiling fan.
+                </div>
+                <div class="flashcard-tap-hint">카드를 다시 탭하여 단어 보기</div>
+              </div>
+              
+            </div>
+          </div>
+          
+          <!-- Card control buttons -->
+          <div class="flashcard-buttons">
+            <button type="button" class="card-btn card-btn-again" onclick="cardAction(false)">
+              <span>❌</span> 다시 학습하기
+            </button>
+            <button type="button" class="card-btn card-btn-know" onclick="cardAction(true)">
+              <span>✅</span> 알고 있어요
+            </button>
+          </div>
+        </div>
+      </section>
+      
+      <!-- VIEW: SCORE SUMMARY -->
+      <section class="view-section" id="view-summary">
+        <div class="summary-card panel">
+          <h2 class="panel-title" style="justify-content:center;">🏆 학습 결과</h2>
+          
+          <div class="score-circle-container">
+            <svg class="score-svg" viewBox="0 0 160 160">
+              <circle class="score-circle-bg" cx="80" cy="80" r="70"></circle>
+              <circle class="score-circle-val" id="summary-score-stroke" cx="80" cy="80" r="70"></circle>
+            </svg>
+            <div class="score-text">
+              <span class="score-percentage" id="summary-percentage">0%</span>
+              <span class="score-fraction" id="summary-fraction">0 / 0</span>
+            </div>
+          </div>
+          
+          <p id="summary-comment" style="font-weight:600; color:var(--text-secondary);">참 잘하셨습니다!</p>
+          
+          <div class="summary-buttons">
+            <button type="button" class="summary-btn summary-btn-primary" onclick="restartSession()">
+              <span>🔄</span> 다시 풀기
+            </button>
+            <button type="button" class="summary-btn summary-btn-secondary" id="summary-retry-failed-btn" onclick="reviewFailedOnly()">
+              <span>❌</span> 틀린 문제만 복습
+            </button>
+            <button type="button" class="summary-btn summary-btn-secondary" onclick="switchView('dashboard')">
+              <span>🏠</span> 홈으로 이동
+            </button>
+          </div>
+          
+          <h3 class="review-section-title">📊 디테일 복습 시트</h3>
+          <div class="review-list" id="summary-review-list">
+            <!-- Dynamically populated review items -->
+          </div>
+        </div>
+      </section>
+      
+      <!-- VIEW: VOCABULARY DICTIONARY -->
+      <section class="view-section" id="view-dictionary">
+        
+        <!-- Search and filters -->
+        <search class="dictionary-controls">
+          <div class="search-input-wrapper">
+            <span class="search-icon">🔍</span>
+            <input type="search" class="dictionary-search" id="dict-search-input" placeholder="단어 또는 뜻 검색..." aria-label="단어 또는 뜻 검색" />
+          </div>
+          
+          <select class="dict-select" id="dict-chapter-select" aria-label="챕터 필터">
+            <option value="all">모든 챕터 보기</option>
+            <!-- Chapter options generated -->
+          </select>
+          
+          <button type="button" class="starred-toggle-btn" id="dict-starred-toggle" onclick="toggleDictStarredFilter()">
+            <span>⭐</span> 북마크만 보기
+          </button>
+        </search>
+        
+        <!-- Grid View of Words -->
+        <div class="dict-grid" id="dict-grid-container">
+          <!-- Dynamically populated cards -->
+        </div>
+        
+        <!-- Pagination controls -->
+        <nav class="pagination" aria-label="단어장 페이지">
+          <button type="button" class="page-btn" id="dict-prev-page" onclick="changePage(-1)">이전</button>
+          <span class="page-info" id="dict-page-info">페이지 1 / 1</span>
+          <button type="button" class="page-btn" id="dict-next-page" onclick="changePage(1)">다음</button>
+        </nav>
+        
+      </section>
+      
+    </main>
+    
+    <!-- Toast Message -->
+    <div class="toast" id="toast-message" role="alert" aria-live="polite">
+      <span id="toast-icon">📢</span>
+      <span id="toast-text">알림 메시지</span>
+    </div>
+    
+    <!-- Footer -->
+    <footer>
+      <p>&copy; 2026 Cowboy & Birdbrain Voca Study Arena. Created with Passion.</p>
+    </footer>
+    
+  </div>
+  
+  <script>
+    // --- Vocabulary Data Placeholder ---
+    // In production, this will be replaced with the full parsed JSON array from the file.
+    const VOCABULARY_DATA = [
+  {
+    "word": "stared down at",
+    "meaning": "~을 내려다보았다",
+    "context": "Birdbrain stared down at Cowboy from the ceiling fan.",
+    "chapter": "Chapter 1: The Deliveries Begin"
+  },
+  {
+    "word": "ceiling fan",
+    "meaning": "천장 선풍기 (실링팬)",
+    "context": "천장에 매달려 돌아가는 큰 선풍기입니다.",
+    "chapter": "Chapter 1: The Deliveries Begin"
+  },
+  {
+    "word": "be afraid",
+    "meaning": "두려워하다, 무서워하다",
+    "context": "Don't be afraid, Birdbrain. (겁먹지 마, 버드브레인.)",
+    "chapter": "Chapter 1: The Deliveries Begin"
+  },
+  {
+    "word": "besides",
+    "meaning": "~ 외에도, ~을 제외하고",
+    "context": "Do you mean besides the time with the steamroller?",
+    "chapter": "Chapter 1: The Deliveries Begin"
+  },
+  {
+    "word": "steamroller",
+    "meaning": "스팀롤러 (도로 다지는 차)",
+    "context": "바퀴 대신 거대한 드럼이 달린 도로 무거운 차입니다.",
+    "chapter": "Chapter 1: The Deliveries Begin"
+  },
+  {
+    "word": "of course",
+    "meaning": "물론이지",
+    "context": "당연히 그렇다는 대답으로 자주 쓰입니다.",
+    "chapter": "Chapter 1: The Deliveries Begin"
+  },
+  {
+    "word": "parachute",
+    "meaning": "낙하산",
+    "context": "...the time my parachute didn't open? (내 낙하산이 안 펴졌던 때?)",
+    "chapter": "Chapter 1: The Deliveries Begin"
+  },
+  {
+    "word": "lion pen",
+    "meaning": "사자 우리",
+    "context": "pen은 동물 가두는 우리(울타리)를 뜻하기도 합니다.",
+    "chapter": "Chapter 1: The Deliveries Begin"
+  },
+  {
+    "word": "beak",
+    "meaning": "(새의) 부리",
+    "context": "...with tomato sauce on my beak... (내 부리에 토마토소스를 묻히고...)",
+    "chapter": "Chapter 1: The Deliveries Begin"
+  },
+  {
+    "word": "napkin",
+    "meaning": "냅킨, 식사 시 쓰는 입 닦개",
+    "context": "...you tied a napkin around the lion's neck...",
+    "chapter": "Chapter 1: The Deliveries Begin"
+  },
+  {
+    "word": "head start",
+    "meaning": "유리한 출발, 먼저 출발하기",
+    "context": "...gave me a three second head start? (내게 3초 먼저 달릴 기회를 줬잖아?)",
+    "chapter": "Chapter 1: The Deliveries Begin"
+  },
+  {
+    "word": "obviously",
+    "meaning": "분명히, 당연히",
+    "context": "\"Yeah,\" said Cowboy. \"Obviously.\" (그래, 당연하지.)",
+    "chapter": "Chapter 1: The Deliveries Begin"
+  },
+  {
+    "word": "tight",
+    "meaning": "단단히, 꽉",
+    "context": "Are you holding on tight? (꽉 잡고 있니?)",
+    "chapter": "Chapter 1: The Deliveries Begin"
+  },
+  {
+    "word": "basically",
+    "meaning": "기본적으로, 사실상",
+    "context": "...wings that are basically useless... (기본적으로 쓸모없는 날개...)",
+    "chapter": "Chapter 1: The Deliveries Begin"
+  },
+  {
+    "word": "useless",
+    "meaning": "쓸모없는",
+    "context": "use(사용) + less(없는)의 합성어입니다.",
+    "chapter": "Chapter 1: The Deliveries Begin"
+  },
+  {
+    "word": "sing in tune",
+    "meaning": "음을 맞춰 노래하다",
+    "context": "...or sing in tune. (혹은 노래 음정을 제대로 맞춰 부르다.)",
+    "chapter": "Chapter 1: The Deliveries Begin"
+  },
+  {
+    "word": "make sense",
+    "meaning": "말이 되다, 앞뒤가 맞다",
+    "context": "Or make sense, added Cowboy. (아니면 말이 되든가.)",
+    "chapter": "Chapter 1: The Deliveries Begin"
+  },
+  {
+    "word": "eyed",
+    "meaning": "(눈여겨) 쳐다보았다",
+    "context": "Birdbrain eyed it hungrily. (버드브레인은 그것을 탐욕스럽게 바라봤다.)",
+    "chapter": "Chapter 1: The Deliveries Begin"
+  },
+  {
+    "word": "hungrily",
+    "meaning": "배고프게, 갈구하듯이",
+    "context": "hunger(배고픔)에서 나온 부사 표현입니다.",
+    "chapter": "Chapter 1: The Deliveries Begin"
+  },
+  {
+    "word": "zoom into",
+    "meaning": "~로 윙 하고 날아가 부딪치다",
+    "context": "...when you think you'll zoom into it.",
+    "chapter": "Chapter 1: The Deliveries Begin"
+  },
+  {
+    "word": "flicked",
+    "meaning": "(스위치 등을) 톡 누르다/돌리다",
+    "context": "He flicked the fan to Level 1. (그는 선풍기를 1단으로 돌렸다.)",
+    "chapter": "Chapter 1: The Deliveries Begin"
+  },
+  {
+    "word": "increase",
+    "meaning": "증가하다, 속도를 높이다",
+    "context": "...the fan increased its speed. (선풍기 속도가 올라갔다.)",
+    "chapter": "Chapter 1: The Deliveries Begin"
+  },
+  {
+    "word": "intercom",
+    "meaning": "구내 전화, 인터콤",
+    "context": "...the work intercom rang. (업무용 인터콤이 울렸다.)",
+    "chapter": "Chapter 1: The Deliveries Begin"
+  },
+  {
+    "word": "by accident / accidentally",
+    "meaning": "실수로, 우연히",
+    "context": "...he accidentally knocked the fan switch... (그가 실수로 스위치를 쳤다.)",
+    "chapter": "Chapter 1: The Deliveries Begin"
+  },
+  {
+    "word": "out of control",
+    "meaning": "통제 불능의, 제어할 수 없는",
+    "context": "Level OUT OF CONTROL (통제 불능 레벨)",
+    "chapter": "Chapter 1: The Deliveries Begin"
+  },
+  {
+    "word": "sigh / sighed",
+    "meaning": "한숨을 쉬다",
+    "context": "\"Sigh,\" sighed the person... (\"휴,\" 그 사람이 한숨 쉬었다.)",
+    "chapter": "Chapter 1: The Deliveries Begin"
+  },
+  {
+    "word": "pronounced",
+    "meaning": "~로 발음되는",
+    "context": "Ms Hambacon (pronounced Harm-bayshon)",
+    "chapter": "Chapter 1: The Deliveries Begin"
+  },
+  {
+    "word": "secretary",
+    "meaning": "비서, 서기",
+    "context": "...the company secretary. (회사 비서.)",
+    "chapter": "Chapter 1: The Deliveries Begin"
+  },
+  {
+    "word": "inept",
+    "meaning": "서툰, 솜씨 없는",
+    "context": "If you two incredibly inept... (너희 두 명의 정말 서툴고...)",
+    "chapter": "Chapter 1: The Deliveries Begin"
+  },
+  {
+    "word": "hopeless",
+    "meaning": "가망 없는, 절망적인",
+    "context": "hope(희망) + less(없는)의 합성어입니다.",
+    "chapter": "Chapter 1: The Deliveries Begin"
+  },
+  {
+    "word": "office",
+    "meaning": "사무실",
+    "context": "...the boss wants to see you in her office. (사장님이 부르신다.)",
+    "chapter": "Chapter 1: The Deliveries Begin"
+  },
+  {
+    "word": "charm",
+    "meaning": "매력",
+    "context": "...the charm angels gave you all the charm... (매력 천사가 매력을 다 줬나 봐.)",
+    "chapter": "Chapter 1: The Deliveries Begin"
+  },
+  {
+    "word": "crack up",
+    "meaning": "빵 터지다, 몹시 웃다",
+    "context": "They all cracked up laughing. (그들은 모두 빵 터져 웃었다.)",
+    "chapter": "Chapter 1: The Deliveries Begin"
+  },
+  {
+    "word": "rocketed off",
+    "meaning": "로켓처럼 날아갔다",
+    "context": "...as he rocketed off the fan... (그가 선풍기에서 날아가며...)",
+    "chapter": "Chapter 1: The Deliveries Begin"
+  },
+  {
+    "word": "splatted",
+    "meaning": "철퍽하고 세게 부딪쳤다",
+    "context": "...and splatted into the wall. (그리고 벽에 철퍼덕 부딪쳤다.)",
+    "chapter": "Chapter 1: The Deliveries Begin"
+  },
+  {
+    "word": "roll one's eyes",
+    "meaning": "눈알을 굴리다 (한심해하다)",
+    "context": "Cowboy rolled his eyes. (카우보이는 눈을 굴렸다.)",
+    "chapter": "Chapter 1: The Deliveries Begin"
+  },
+  {
+    "word": "copy / copying",
+    "meaning": "따라 하다, 모방하다",
+    "context": "Birdbrain tried to roll his eyes too (he loved copying Cowboy).",
+    "chapter": "Chapter 1: The Deliveries Begin"
+  },
+  {
+    "word": "in the nick of time",
+    "meaning": "아슬아슬하게 제시간에, 마침맞게",
+    "context": "Cowboy caught him just in the nick of time. (카우보이가 그를 아슬아슬하게 살렸다.)",
+    "chapter": "Chapter 1: The Deliveries Begin"
+  },
+  {
+    "word": "hilarious",
+    "meaning": "아주 우스광스러운, 재미있는",
+    "context": "Hilarious. Look! (진짜 웃긴다. 봐봐!)",
+    "chapter": "Chapter 1: The Deliveries Begin"
+  },
+  {
+    "word": "slip",
+    "meaning": "미끄러지다",
+    "context": "You can't jump off ice you'll slip! (얼음 위에서 뛰면 미끄러져!)",
+    "chapter": "Chapter 1: The Deliveries Begin"
+  },
+  {
+    "word": "slam down",
+    "meaning": "쾅 내려치다",
+    "context": "...slamming down her fist... (그녀의 주먹을 쾅 내려치며...)",
+    "chapter": "Chapter 2: The Mission and Rules"
+  },
+  {
+    "word": "fish tank",
+    "meaning": "어항",
+    "context": "...into the fish tank. (어항 안으로.)",
+    "chapter": "Chapter 2: The Mission and Rules"
+  },
+  {
+    "word": "it kills me to",
+    "meaning": "~하려니 죽을 맛이다",
+    "context": "...is why it kills me to give you this next job.",
+    "chapter": "Chapter 2: The Mission and Rules"
+  },
+  {
+    "word": "poisonous",
+    "meaning": "독이 있는, 유독한",
+    "context": "Poisonous banana fritters? (독이 든 바나나 튀김?)",
+    "chapter": "Chapter 2: The Mission and Rules"
+  },
+  {
+    "word": "cannonball",
+    "meaning": "대포알",
+    "context": "대포에서 쏘는 동그랗고 무거운 쇠 공입니다.",
+    "chapter": "Chapter 2: The Mission and Rules"
+  },
+  {
+    "word": "stampede",
+    "meaning": "(동물들의) 우르르 달아남/짓밟음",
+    "context": "Elephant stampede? (코끼리 떼의 짓밟기?)",
+    "chapter": "Chapter 2: The Mission and Rules"
+  },
+  {
+    "word": "groaned",
+    "meaning": "신음 소리를 냈다, 투덜댔다",
+    "context": "\"Seriously?\" Cowboy groaned. (\"진짜요?\" 카우보이가 신음했다.)",
+    "chapter": "Chapter 2: The Mission and Rules"
+  },
+  {
+    "word": "duty",
+    "meaning": "의무, 임무 (당번)",
+    "context": "...toilet-cleaning duties on spicy-food Fridays. (매운 음식 나오는 금요일의 화장실 청소 당번.)",
+    "chapter": "Chapter 2: The Mission and Rules"
+  },
+  {
+    "word": "deliver",
+    "meaning": "배달하다",
+    "context": "...what do we deliver? (우리가 무엇을 배달하지?)",
+    "chapter": "Chapter 2: The Mission and Rules"
+  },
+  {
+    "word": "trusty",
+    "meaning": "믿을 수 있는, 든든한",
+    "context": "...she pulled out her trusty company motto charts. (그녀의 든든한 모토 차트.)",
+    "chapter": "Chapter 2: The Mission and Rules"
+  },
+  {
+    "word": "motto",
+    "meaning": "모토, 좌우명",
+    "context": "집단이나 개인이 추구하는 신조(행동 지침)입니다.",
+    "chapter": "Chapter 2: The Mission and Rules"
+  },
+  {
+    "word": "sensible",
+    "meaning": "분별 있는, 현명한",
+    "context": "...please be sensible for once... (이번 한 번만 제발 분별 있게 굴어라.)",
+    "chapter": "Chapter 2: The Mission and Rules"
+  },
+  {
+    "word": "impressed",
+    "meaning": "감명받은, 깊은 인상을 받은",
+    "context": "The boss looked impressed. (사장님은 깊은 인상을 받은 듯했다.)",
+    "chapter": "Chapter 2: The Mission and Rules"
+  },
+  {
+    "word": "reliable",
+    "meaning": "믿을 수 있는",
+    "context": "Fast And Reliable Tracking Services (신속하고 신뢰할 수 있는 추적 서비스)",
+    "chapter": "Chapter 2: The Mission and Rules"
+  },
+  {
+    "word": "identical twins",
+    "meaning": "일란성 쌍둥이",
+    "context": "...they're identical twins... (그들은 일란성 쌍둥이야...)",
+    "chapter": "Chapter 2: The Mission and Rules"
+  },
+  {
+    "word": "squealed",
+    "meaning": "꽥 비명을 질렀다, 끼익 소리 냈다",
+    "context": "\"Me too!\" Birdbrain squealed. (\"나도!\" 버드브레인이 꽥 질렀다.)",
+    "chapter": "Chapter 2: The Mission and Rules"
+  },
+  {
+    "word": "snoring",
+    "meaning": "코를 골기",
+    "context": "...sounded like a dragon snoring. (용이 코 고는 것 같은 소리.)",
+    "chapter": "Chapter 2: The Mission and Rules"
+  },
+  {
+    "word": "vicious",
+    "meaning": "포악한, 잔인한",
+    "context": "...delivering a vicious Bengal tiger... (포악한 벵갈 호랑이를 배달 중인...)",
+    "chapter": "Chapter 2: The Mission and Rules"
+  },
+  {
+    "word": "tropical island",
+    "meaning": "열대 섬",
+    "context": "더운 지방에 위치한 야자수가 있는 섬들입니다.",
+    "chapter": "Chapter 2: The Mission and Rules"
+  },
+  {
+    "word": "risky",
+    "meaning": "위험한, 모험적인",
+    "context": "...most DANGEROUS and RISKY delivery ever. (가장 위험하고 모험적인 배달.)",
+    "chapter": "Chapter 2: The Mission and Rules"
+  },
+  {
+    "word": "turtle pond",
+    "meaning": "거북이 연못",
+    "context": "...into the turtle pond. (거북이 연못 안으로.)",
+    "chapter": "Chapter 2: The Mission and Rules"
+  },
+  {
+    "word": "despite",
+    "meaning": "~에도 불구하고",
+    "context": "So, despite my better judgment... (내 더 나은 판단에도 불구하고...)",
+    "chapter": "Chapter 2: The Mission and Rules"
+  },
+  {
+    "word": "judgment",
+    "meaning": "판단, 의견",
+    "context": "스스로 옳고 그름을 가려내는 능력입니다.",
+    "chapter": "Chapter 2: The Mission and Rules"
+  },
+  {
+    "word": "rely on",
+    "meaning": "~에 의지하다, 믿다",
+    "context": "...I am relying on you two buffoons... (내가 너희 두 광대를 믿다니...)",
+    "chapter": "Chapter 2: The Mission and Rules"
+  },
+  {
+    "word": "buffoon",
+    "meaning": "광대, 얼간이",
+    "context": "buffoon은 행동이 어리석고 우스꽝스러운 사람을 낮춰 부르는 말입니다.",
+    "chapter": "Chapter 2: The Mission and Rules"
+  },
+  {
+    "word": "stare blankly",
+    "meaning": "멍하니 바라보다",
+    "context": "Cowboy and Birdbrain stared blankly at her. (멍하니 쳐다보았다.)",
+    "chapter": "Chapter 2: The Mission and Rules"
+  },
+  {
+    "word": "shake dry",
+    "meaning": "몸을 털어 말리다",
+    "context": "...shaking himself dry. (몸을 털어 물기를 말리며.)",
+    "chapter": "Chapter 2: The Mission and Rules"
+  },
+  {
+    "word": "address",
+    "meaning": "주소",
+    "context": "The address is clearly written on it. (주소가 선명하게 적혀 있다.)",
+    "chapter": "Chapter 2: The Mission and Rules"
+  },
+  {
+    "word": "fate",
+    "meaning": "운명",
+    "context": "The fate of the entire company... (회사 전체의 운명이...)",
+    "chapter": "Chapter 2: The Mission and Rules"
+  },
+  {
+    "word": "depend on",
+    "meaning": "~에 달려있다, 의존하다",
+    "context": "...depends on you! (~너희에게 달려있다!)",
+    "chapter": "Chapter 2: The Mission and Rules"
+  },
+  {
+    "word": "head for",
+    "meaning": "~로 향하다",
+    "context": "...and headed for the door. (그리고 문을 향해 나섰다.)",
+    "chapter": "Chapter 2: The Mission and Rules"
+  },
+  {
+    "word": "let someone down",
+    "meaning": "~를 실망시키다",
+    "context": "We won't let you down. (실망시키지 않을게요.)",
+    "chapter": "Chapter 2: The Mission and Rules"
+  },
+  {
+    "word": "proud",
+    "meaning": "자랑스러운",
+    "context": "We'll make you proud! (자랑스럽게 만들어 드릴게요!)",
+    "chapter": "Chapter 2: The Mission and Rules"
+  },
+  {
+    "word": "knock oneself out",
+    "meaning": "정신을 잃다, 기절하다",
+    "context": "...and knocking himself out. (스스로 부딪쳐 기절했다.)",
+    "chapter": "Chapter 2: The Mission and Rules"
+  },
+  {
+    "word": "family business",
+    "meaning": "가업 (가족 사업)",
+    "context": "...joined the family business instead... (대신 가업을 이어받을 걸 그랬나.)",
+    "chapter": "Chapter 2: The Mission and Rules"
+  },
+  {
+    "word": "practise / practice",
+    "meaning": "연습하다",
+    "context": "...to practise his reading. (독서 연습을 하기 위해.)",
+    "chapter": "Chapter 2: The Mission and Rules"
+  },
+  {
+    "word": "get moving",
+    "meaning": "출발하다, 서두르다",
+    "context": "We'll have to get moving soon. (곧 서둘러 출발해야 해.)",
+    "chapter": "Chapter 2: The Mission and Rules"
+  },
+  {
+    "word": "heaps of",
+    "meaning": "많은, 수많은",
+    "context": "There are probably heaps of them out there. (저 밖에 엄청 많을 텐데.)",
+    "chapter": "Chapter 2: The Mission and Rules"
+  },
+  {
+    "word": "smack-bang",
+    "meaning": "정통으로, 딱 중간에",
+    "context": "Like, smack-bang? (딱 한가운데에?)",
+    "chapter": "Chapter 2: The Mission and Rules"
+  },
+  {
+    "word": "work out",
+    "meaning": "해결하다, 알아내다",
+    "context": "Anyway, we'll work it out. (어쨌든 해결해 낼 거야.)",
+    "chapter": "Chapter 2: The Mission and Rules"
+  },
+  {
+    "word": "otherwise",
+    "meaning": "그렇지 않으면",
+    "context": "Otherwise it will be Christmas... (그렇지 않으면 크리스마스가 될 거야...)",
+    "chapter": "Chapter 2: The Mission and Rules"
+  },
+  {
+    "word": "popular",
+    "meaning": "인기 있는",
+    "context": "...most popular Christmas carols... (가장 인기 있는 크리스마스 캐롤...)",
+    "chapter": "Chapter 2: The Mission and Rules"
+  },
+  {
+    "word": "smudged out",
+    "meaning": "얼룩으로 지워진",
+    "context": "...the rest of it is smudged out. (나머지 부분이 얼룩져 안 보였다.)",
+    "chapter": "Chapter 2: The Mission and Rules"
+  },
+  {
+    "word": "chime in",
+    "meaning": "대화에 끼어들다, 거들다",
+    "context": "...Birdbrain chimed in. (버드브레인이 끼어들었다.)",
+    "chapter": "Chapter 2: The Mission and Rules"
+  },
+  {
+    "word": "recently",
+    "meaning": "최근에",
+    "context": "...the boss had installed recently... (사장님이 최근에 설치했던...)",
+    "chapter": "Chapter 2: The Mission and Rules"
+  },
+  {
+    "word": "docks",
+    "meaning": "부두, 선착장",
+    "context": "...parked their delivery van at the docks... (부두에 배달 트럭을 세웠다.)",
+    "chapter": "Chapter 3: At the Docks and the Ocean"
+  },
+  {
+    "word": "parking meter",
+    "meaning": "주차 요금 징수기",
+    "context": "...put coins in the parking meter. (주차 요금 기계에 동전을 넣었다.)",
+    "chapter": "Chapter 3: At the Docks and the Ocean"
+  },
+  {
+    "word": "suit",
+    "meaning": "정장, 슈트",
+    "context": "\"Really? I'm wearing a suit.\" (\"진짜요? 저 정장 입었는데요.\")",
+    "chapter": "Chapter 3: At the Docks and the Ocean"
+  },
+  {
+    "word": "own",
+    "meaning": "소유하다, 자기의",
+    "context": "I own these docks. (내가 이 부두의 주인이다.)",
+    "chapter": "Chapter 3: At the Docks and the Ocean"
+  },
+  {
+    "word": "nappy",
+    "meaning": "기저귀",
+    "context": "영국의 구어체 표현으로, 미국식 diaper와 같은 뜻입니다.",
+    "chapter": "Chapter 3: At the Docks and the Ocean"
+  },
+  {
+    "word": "clench one's fists/teeth",
+    "meaning": "주먹을 쥐다 / 이를 악물다",
+    "context": "Billy clenched his fists and teeth. (빌리는 주먹을 쥐고 이를 악물었다.)",
+    "chapter": "Chapter 3: At the Docks and the Ocean"
+  },
+  {
+    "word": "gasp / gasped",
+    "meaning": "깜짝 놀라 한숨을 쉬다",
+    "context": "Birdbrain gasped. He was shocked. (버드브레인은 숨이 턱 막혀 놀랐다.)",
+    "chapter": "Chapter 3: At the Docks and the Ocean"
+  },
+  {
+    "word": "stinky",
+    "meaning": "냄새나는",
+    "context": "Super stinky. (엄청 지독한 냄새가 나.)",
+    "chapter": "Chapter 3: At the Docks and the Ocean"
+  },
+  {
+    "word": "hold one's breath",
+    "meaning": "숨을 참다",
+    "context": "...you better hold your breath! (숨을 참는 게 좋을 거야!)",
+    "chapter": "Chapter 3: At the Docks and the Ocean"
+  },
+  {
+    "word": "tactic",
+    "meaning": "전술, 전략",
+    "context": "Cowboy tried a different tactic. (카우보이는 다른 전술을 썼다.)",
+    "chapter": "Chapter 3: At the Docks and the Ocean"
+  },
+  {
+    "word": "lap / lapping",
+    "meaning": "(파도가) 찰랑거리다",
+    "context": "...above the lapping waves. (찰랑거리는 파도 위로.)",
+    "chapter": "Chapter 3: At the Docks and the Ocean"
+  },
+  {
+    "word": "bob about",
+    "meaning": "둥둥 떠다니다",
+    "context": "Birdbrain bobbed about in the water... (물속에 둥둥 떠서...)",
+    "chapter": "Chapter 3: At the Docks and the Ocean"
+  },
+  {
+    "word": "realise",
+    "meaning": "깨닫다, 이해하다",
+    "context": "...and realised something. (그리고 무언가 깨달았다.)",
+    "chapter": "Chapter 3: At the Docks and the Ocean"
+  },
+  {
+    "word": "scoop out",
+    "meaning": "건져 올리다",
+    "context": "...scooped Birdbrain out of the water... (물에서 건져냈다.)",
+    "chapter": "Chapter 3: At the Docks and the Ocean"
+  },
+  {
+    "word": "on schedule",
+    "meaning": "예정대로, 일정표대로",
+    "context": "Things were on schedule. (일이 일정대로 가고 있었다.)",
+    "chapter": "Chapter 3: At the Docks and the Ocean"
+  },
+  {
+    "word": "endless",
+    "meaning": "끝없는",
+    "context": "...staring at the endless ocean... (끝없는 바다를 바라보며...)",
+    "chapter": "Chapter 3: At the Docks and the Ocean"
+  },
+  {
+    "word": "lost",
+    "meaning": "길을 잃은",
+    "context": "...and they were lost. (그리고 그들은 길을 잃었다.)",
+    "chapter": "Chapter 3: At the Docks and the Ocean"
+  },
+  {
+    "word": "shark fin",
+    "meaning": "상어 지느러미",
+    "context": "물 밖으로 솟은 상어의 상징적인 지느러미입니다.",
+    "chapter": "Chapter 3: At the Docks and the Ocean"
+  },
+  {
+    "word": "attached to",
+    "meaning": "~에 부착된, 달린",
+    "context": "And attached to those shark fins... (그리고 그 지느러미에 연결된...)",
+    "chapter": "Chapter 3: At the Docks and the Ocean"
+  },
+  {
+    "word": "circle",
+    "meaning": "빙빙 돌다",
+    "context": "The sharks circled the boat. (상어들이 배 주변을 맴돌았다.)",
+    "chapter": "Chapter 3: At the Docks and the Ocean"
+  },
+  {
+    "word": "inflatable",
+    "meaning": "공기를 주입하게 된 (튜브식)",
+    "context": "...their inflatable rubber dinghy. (바람 넣는 고무 보트.)",
+    "chapter": "Chapter 3: At the Docks and the Ocean"
+  },
+  {
+    "word": "rubber dinghy",
+    "meaning": "고무 보트",
+    "context": "작고 가벼운 구조용/레저용 고무 배입니다.",
+    "chapter": "Chapter 3: At the Docks and the Ocean"
+  },
+  {
+    "word": "pop",
+    "meaning": "펑 하고 터지다",
+    "context": "Or at least one that wouldn't pop... (적어도 안 터지는 배요...)",
+    "chapter": "Chapter 3: At the Docks and the Ocean"
+  },
+  {
+    "word": "shark-infested",
+    "meaning": "상어가 우글거리는",
+    "context": "...in shark-infested waters? (상어가 우글거리는 물에서?)",
+    "chapter": "Chapter 3: At the Docks and the Ocean"
+  },
+  {
+    "word": "tippy toes",
+    "meaning": "발가락 끝",
+    "context": "He stood on tippy toes. (그는 발끝으로 까치발을 하고 섰다.)",
+    "chapter": "Chapter 3: At the Docks and the Ocean"
+  },
+  {
+    "word": "peck",
+    "meaning": "(부리로) 쪼다",
+    "context": "...only peck an inflatable rubber dinghy... (고무보트를 쪼아 대려면...)",
+    "chapter": "Chapter 3: At the Docks and the Ocean"
+  },
+  {
+    "word": "marshmallow",
+    "meaning": "마시멜로",
+    "context": "솜사탕처럼 폭신하고 달콤한 과자입니다.",
+    "chapter": "Chapter 3: At the Docks and the Ocean"
+  },
+  {
+    "word": "rapidly-sinking",
+    "meaning": "빠르게 가라앉는",
+    "context": "...rapidly-sinking dinghy... (빠르게 가라앉는 고무배...)",
+    "chapter": "Chapter 3: At the Docks and the Ocean"
+  },
+  {
+    "word": "tip / tipped",
+    "meaning": "기울다, 뒤집히다",
+    "context": "...which meant that THEY tipped... (그것은 그들이 뒤집혔음을 뜻했다.)",
+    "chapter": "Chapter 3: At the Docks and the Ocean"
+  },
+  {
+    "word": "man-eating",
+    "meaning": "사람을 잡아먹는 (식인)",
+    "context": "...man-eating sharks... (식인 상어들...)",
+    "chapter": "Chapter 3: At the Docks and the Ocean"
+  },
+  {
+    "word": "be on a diet",
+    "meaning": "다이어트 중이다",
+    "context": "...these sharks were on a diet... (이 상어들은 다이어트 중이었다...)",
+    "chapter": "Chapter 3: At the Docks and the Ocean"
+  },
+  {
+    "word": "drag oneself",
+    "meaning": "몸을 질질 끌고 가다",
+    "context": "...dragged themselves out of the water... (물 밖으로 간신히 몸을 끌고 나왔다.)",
+    "chapter": "Chapter 3: At the Docks and the Ocean"
+  },
+  {
+    "word": "exhausted",
+    "meaning": "기진맥진한, 몹시 지친",
+    "context": "Cowboy, almost too exhausted to speak... (말도 못 할 만큼 지친 카우보이...)",
+    "chapter": "Chapter 3: At the Docks and the Ocean"
+  },
+  {
+    "word": "distract",
+    "meaning": "(주의를) 딴 데로 돌리다",
+    "context": "...distract the sharks? (상어들의 정신을 딴 데로 돌렸지?)",
+    "chapter": "Chapter 3: At the Docks and the Ocean"
+  },
+  {
+    "word": "magnet",
+    "meaning": "자석",
+    "context": "...the giraffe and the magnet... (기린과 자석...)",
+    "chapter": "Chapter 3: At the Docks and the Ocean"
+  },
+  {
+    "word": "speedboat",
+    "meaning": "쾌속정, 모터보트",
+    "context": "매우 빠르게 달리는 엔진 달린 작은 배입니다.",
+    "chapter": "Chapter 3: At the Docks and the Ocean"
+  },
+  {
+    "word": "chewing gum",
+    "meaning": "씹는 껌",
+    "context": "...a packet of chewing gum? (껌 한 갑?)",
+    "chapter": "Chapter 3: At the Docks and the Ocean"
+  },
+  {
+    "word": "fluffy",
+    "meaning": "솜털이 보송보송한",
+    "context": "...would it be fluffy and cute? (솜털이 보송하고 귀여울까?)",
+    "chapter": "Chapter 3: At the Docks and the Ocean"
+  },
+  {
+    "word": "commercial",
+    "meaning": "광고, 상업 광고",
+    "context": "...watch shampoo commercials? (샴푸 광고를 볼 때?)",
+    "chapter": "Chapter 3: At the Docks and the Ocean"
+  },
+  {
+    "word": "run out of",
+    "meaning": "~이 다 떨어지다, 부족해지다",
+    "context": "...if the world ran out of toilet paper... (화장지가 다 떨어지면...)",
+    "chapter": "Chapter 3: At the Docks and the Ocean"
+  },
+  {
+    "word": "eventually",
+    "meaning": "결국, 마침내",
+    "context": "...you got there eventually... (너도 결국은 이해했구나...)",
+    "chapter": "Chapter 3: At the Docks and the Ocean"
+  },
+  {
+    "word": "shrug / shrugged",
+    "meaning": "어깨를 으쓱하다",
+    "context": "...Cowboy shrugged. (카우보이는 어깨를 으쓱했다.)",
+    "chapter": "Chapter 3: At the Docks and the Ocean"
+  },
+  {
+    "word": "crash into",
+    "meaning": "~에 충돌하다",
+    "context": "...crashed into the boat... (배에 정면충돌했다...)",
+    "chapter": "Chapter 3: At the Docks and the Ocean"
+  },
+  {
+    "word": "explode / exploded",
+    "meaning": "폭발하다",
+    "context": "...and they both exploded. (그리고 둘 다 폭발했다.)",
+    "chapter": "Chapter 3: At the Docks and the Ocean"
+  },
+  {
+    "word": "astronaut",
+    "meaning": "우주비행사",
+    "context": "우주선에서 임무를 수행하는 요원입니다.",
+    "chapter": "Chapter 3: At the Docks and the Ocean"
+  },
+  {
+    "word": "eject / ejected",
+    "meaning": "탈출하다, 튀어나오다",
+    "context": "...the astronaut ejected... (우주비행사가 탈출했다...)",
+    "chapter": "Chapter 3: At the Docks and the Ocean"
+  },
+  {
+    "word": "survive / survived",
+    "meaning": "살아남다, 생존하다",
+    "context": "...people on the boat survived... (배의 사람들이 살아남았다...)",
+    "chapter": "Chapter 3: At the Docks and the Ocean"
+  },
+  {
+    "word": "slice",
+    "meaning": "얇게 베다, 조각내다",
+    "context": "Or slice them into tiny pieces. (혹은 조각조각 잘라내든가.)",
+    "chapter": "Chapter 3: At the Docks and the Ocean"
+  },
+  {
+    "word": "hectic",
+    "meaning": "몹시 바쁜, 정신없는",
+    "context": "...this is hectic? (이거 엄청 정신없네/빡세네?)",
+    "chapter": "Chapter 3: At the Docks and the Ocean"
+  },
+  {
+    "word": "upside down",
+    "meaning": "거꾸로, 뒤집혀",
+    "context": "...flying upside down... (거꾸로 날고 있는...)",
+    "chapter": "Chapter 3: At the Docks and the Ocean"
+  },
+  {
+    "word": "hop in / hopped in",
+    "meaning": "(차나 배 등에) 타다",
+    "context": "\"Hop in.\" (\"타라.\")",
+    "chapter": "Chapter 4: The Helicopter and the Comebacks"
+  },
+  {
+    "word": "take off / took off",
+    "meaning": "이륙하다, 날아오르다",
+    "context": "...the helicopter took off... (헬리콥터가 이륙했다...)",
+    "chapter": "Chapter 4: The Helicopter and the Comebacks"
+  },
+  {
+    "word": "nag / nagging",
+    "meaning": "괴롭히다, 머릿속을 맴돌다",
+    "context": "...something was nagging at Cowboy. (카우보이를 찜찜하게 만드는 것.)",
+    "chapter": "Chapter 4: The Helicopter and the Comebacks"
+  },
+  {
+    "word": "nice try",
+    "meaning": "좋은 시도였어 (아쉽네)",
+    "context": "장난이나 속임수를 눈치채고 받아치는 표현입니다.",
+    "chapter": "Chapter 4: The Helicopter and the Comebacks"
+  },
+  {
+    "word": "sulk",
+    "meaning": "부루퉁해지다, 삐지다",
+    "context": "He went off to sulk... (그는 삐져서 가버렸다...)",
+    "chapter": "Chapter 4: The Helicopter and the Comebacks"
+  },
+  {
+    "word": "familiar",
+    "meaning": "친숙한, 낯익은",
+    "context": "...seemed really familiar. (정말 낯이 익어 보였다.)",
+    "chapter": "Chapter 4: The Helicopter and the Comebacks"
+  },
+  {
+    "word": "sarcastic",
+    "meaning": "비꼬는, 빈정대는",
+    "context": "\"Woah, easy there, Sarcastic Sally...\" (워워, 살살 해 비꼬기 대장님...)",
+    "chapter": "Chapter 4: The Helicopter and the Comebacks"
+  },
+  {
+    "word": "attitude",
+    "meaning": "건방진 태도, 태도",
+    "context": "You've got a bit of attitude! (너 꽤 태도가 불량하구나!)",
+    "chapter": "Chapter 4: The Helicopter and the Comebacks"
+  },
+  {
+    "word": "raise an eyebrow",
+    "meaning": "눈썹을 치켜올리다",
+    "context": "...raised an eyebrow. (눈썹을 한쪽 올렸다.)",
+    "chapter": "Chapter 4: The Helicopter and the Comebacks"
+  },
+  {
+    "word": "challenge",
+    "meaning": "도전",
+    "context": "\"A challenge?\" (\"도전장?\")",
+    "chapter": "Chapter 4: The Helicopter and the Comebacks"
+  },
+  {
+    "word": "old-fashioned",
+    "meaning": "구식의",
+    "context": "...old-fashioned comeback competition? (전통적인 말대꾸 배틀?)",
+    "chapter": "Chapter 4: The Helicopter and the Comebacks"
+  },
+  {
+    "word": "comeback",
+    "meaning": "맞받아치는 말, 대꾸",
+    "context": "재치 있게 응수하는 말싸움 무기를 뜻합니다.",
+    "chapter": "Chapter 4: The Helicopter and the Comebacks"
+  },
+  {
+    "word": "bother",
+    "meaning": "애쓰다, 신경 쓰다",
+    "context": "...then why even bother? (그럼 굳이 신경 쓸 게 뭐 있어?)",
+    "chapter": "Chapter 4: The Helicopter and the Comebacks"
+  },
+  {
+    "word": "chance",
+    "meaning": "기회, 이길 확률",
+    "context": "...you have a chance. (네가 이길 기회가 있는 줄 알게.)",
+    "chapter": "Chapter 4: The Helicopter and the Comebacks"
+  },
+  {
+    "word": "sniffed",
+    "meaning": "코를 킁킁거렸다 (콧방귀 뀌었다)",
+    "context": "...sniffed the pilot. (조종사가 콧방귀를 뀌었다.)",
+    "chapter": "Chapter 4: The Helicopter and the Comebacks"
+  },
+  {
+    "word": "silent letter",
+    "meaning": "묵음 (소리 안 나는 글자)",
+    "context": "Silent letters are probably... (묵음 글자들은 아마도...)",
+    "chapter": "Chapter 4: The Helicopter and the Comebacks"
+  },
+  {
+    "word": "scoffed",
+    "meaning": "비웃었다, 콧방귀 뀌었다",
+    "context": "...Cowboy scoffed. (카우보이가 비웃었다.)",
+    "chapter": "Chapter 4: The Helicopter and the Comebacks"
+  },
+  {
+    "word": "peas in a pod",
+    "meaning": "닮은꼴, 아주 친한 사이",
+    "context": "...like we're two peas in a pod! (우린 아주 똑 닮은 단짝 같아!)",
+    "chapter": "Chapter 4: The Helicopter and the Comebacks"
+  },
+  {
+    "word": "shush",
+    "meaning": "쉿 (조용히 해)",
+    "context": "\"Shush, Birdbrain...\" (쉿, 조용히 해봐...)",
+    "chapter": "Chapter 4: The Helicopter and the Comebacks"
+  },
+  {
+    "word": "have a moment",
+    "meaning": "중요한 순간을 보내다",
+    "context": "...we're having a moment here... (우리 진지한 이야기 하잖아...)",
+    "chapter": "Chapter 4: The Helicopter and the Comebacks"
+  },
+  {
+    "word": "evil",
+    "meaning": "사악한",
+    "context": "...the evil identical twins. (그 사악한 일란성 쌍둥이.)",
+    "chapter": "Chapter 4: The Helicopter and the Comebacks"
+  },
+  {
+    "word": "disguise",
+    "meaning": "변장, 위장",
+    "context": "...one of the identical twins, in disguise! (쌍둥이 중 하나가 변장한 것!)",
+    "chapter": "Chapter 4: The Helicopter and the Comebacks"
+  },
+  {
+    "word": "let that slide",
+    "meaning": "그냥 봐주다, 묵인하다",
+    "context": "WE WEREN'T GOING TO LET THAT SLIDE (그냥 봐줄 수 없지!)",
+    "chapter": "Chapter 4: The Helicopter and the Comebacks"
+  },
+  {
+    "word": "convinced",
+    "meaning": "설득했다, 납득시켰다",
+    "context": "We convinced the Farnham Brothers... (판햄 형제들을 설득했다.)",
+    "chapter": "Chapter 4: The Helicopter and the Comebacks"
+  },
+  {
+    "word": "bluff / bluffing",
+    "meaning": "허풍을 떨다, 속임수를 쓰다",
+    "context": "We were just bluffing... (우리는 그냥 겁주려고 허풍 친 거야.)",
+    "chapter": "Chapter 4: The Helicopter and the Comebacks"
+  },
+  {
+    "word": "fluffing",
+    "meaning": "방귀를 뀌는 것 (구어체)",
+    "context": "Birdbrain은 bluffing(허풍)을 fluffing(방귀)으로 착각했습니다.",
+    "chapter": "Chapter 4: The Helicopter and the Comebacks"
+  },
+  {
+    "word": "sneaky",
+    "meaning": "엉큼한, 야비한",
+    "context": "Bluffs are sneaky. (허풍은 속임수야.)",
+    "chapter": "Chapter 4: The Helicopter and the Comebacks"
+  },
+  {
+    "word": "gotcha",
+    "meaning": "알았어, 잡았다",
+    "context": "\"Ah. OK. Gotcha.\" (\"아, 알았어.\")",
+    "chapter": "Chapter 4: The Helicopter and the Comebacks"
+  },
+  {
+    "word": "tell apart",
+    "meaning": "구별하다, 분간하다",
+    "context": "...I seriously can't tell you apart... (난 진짜 너네 구별 못 하겠다...)",
+    "chapter": "Chapter 4: The Helicopter and the Comebacks"
+  },
+  {
+    "word": "whisper / whispered",
+    "meaning": "속삭이다",
+    "context": "...whispered the non-pilot. (조종사 아닌 쪽이 속삭였다.)",
+    "chapter": "Chapter 4: The Helicopter and the Comebacks"
+  },
+  {
+    "word": "overboard",
+    "meaning": "배 밖으로, 헬기 밖으로",
+    "context": "...throw these two overboard... (이 두 녀석을 밖으로 던지자...)",
+    "chapter": "Chapter 4: The Helicopter and the Comebacks"
+  },
+  {
+    "word": "dairy-free",
+    "meaning": "우제품이 안 든, 무유제품",
+    "context": "...dairy-free milk... (우유 성분이 없는 우유...)",
+    "chapter": "Chapter 4: The Helicopter and the Comebacks"
+  },
+  {
+    "word": "shouldn't have",
+    "meaning": "~하지 말았어야 했다",
+    "context": "Everyone shouldn't have. (모두가 냄새를 맡지 말았어야 했다.)",
+    "chapter": "Chapter 4: The Helicopter and the Comebacks"
+  },
+  {
+    "word": "spring into action",
+    "meaning": "즉시 움직이기 시작하다",
+    "context": "...sprang into action. (신속하게 행동을 개시했다.)",
+    "chapter": "Chapter 4: The Helicopter and the Comebacks"
+  },
+  {
+    "word": "grabbed",
+    "meaning": "움켜쥐었다",
+    "context": "Cowboy grabbed pilot... (카우보이는 조종사를 꽉 잡았다.)",
+    "chapter": "Chapter 4: The Helicopter and the Comebacks"
+  },
+  {
+    "word": "octopus",
+    "meaning": "문어",
+    "context": "Why do you have an octopus tail? (왜 문어 다리 꼬리가 있어?)",
+    "chapter": "Chapter 4: The Helicopter and the Comebacks"
+  },
+  {
+    "word": "panic",
+    "meaning": "공포에 질려 어쩔 줄 모름",
+    "context": "...while I panic about... (내가 헬기 조종할 사람 없어 당황하는 동안!)",
+    "chapter": "Chapter 4: The Helicopter and the Comebacks"
+  },
+  {
+    "word": "due",
+    "meaning": "~하기로 예정된, 만기인",
+    "context": "The package was due at 8:37 pm. (배달 기한이 8시 37분이었다.)",
+    "chapter": "Chapter 4: The Helicopter and the Comebacks"
+  },
+  {
+    "word": "bloodthirsty",
+    "meaning": "피에 굶주린, 잔인한",
+    "context": "...with a bloodthirsty crew of... (피에 굶주린 선원들과...)",
+    "chapter": "Chapter 5: Pirate Ship and the Great Escape"
+  },
+  {
+    "word": "crew",
+    "meaning": "선원, 승무원 전체",
+    "context": "배나 비행기 등을 함께 조종하는 요원 집단입니다.",
+    "chapter": "Chapter 5: Pirate Ship and the Great Escape"
+  },
+  {
+    "word": "performing artist",
+    "meaning": "공연 예술인",
+    "context": "무대 위에서 연기나 연주를 하는 직업인입니다.",
+    "chapter": "Chapter 5: Pirate Ship and the Great Escape"
+  },
+  {
+    "word": "petunia",
+    "meaning": "페튜니아 (꽃 이름)",
+    "context": "나팔꽃을 닮은 보라색, 붉은색 등의 화려한 꽃입니다.",
+    "chapter": "Chapter 5: Pirate Ship and the Great Escape"
+  },
+  {
+    "word": "fearsome",
+    "meaning": "무시무시한, 무서운",
+    "context": "...a man so fearsome... (너무나 무시무시한 남자...)",
+    "chapter": "Chapter 5: Pirate Ship and the Great Escape"
+  },
+  {
+    "word": "walk the plank",
+    "meaning": "널빤지 위를 걷다 (바다에 던져지다)",
+    "context": "해적선에서 포로를 널빤지 끝으로 걸어가게 하여 빠뜨려 죽이는 형벌입니다.",
+    "chapter": "Chapter 5: Pirate Ship and the Great Escape"
+  },
+  {
+    "word": "dare / dared",
+    "meaning": "감히 ~하다",
+    "context": "...or if you ever dared to call him... (혹은 감히 그를 ~라 부르면...)",
+    "chapter": "Chapter 5: Pirate Ship and the Great Escape"
+  },
+  {
+    "word": "pin cushion",
+    "meaning": "바늘꽂이 (핀 쿠션)",
+    "context": "바느질할 때 핀이나 바늘을 꽂아 두는 작은 쿠션입니다.",
+    "chapter": "Chapter 5: Pirate Ship and the Great Escape"
+  },
+  {
+    "word": "vampire bat",
+    "meaning": "흡혈박쥐",
+    "context": "동물의 피를 빠는 박쥐의 일종입니다.",
+    "chapter": "Chapter 5: Pirate Ship and the Great Escape"
+  },
+  {
+    "word": "ridiculous",
+    "meaning": "말도 안 되는, 터무니없는",
+    "context": "...that's ridiculous. (그건 말도 안 되는 소리야.)",
+    "chapter": "Chapter 5: Pirate Ship and the Great Escape"
+  },
+  {
+    "word": "rival",
+    "meaning": "라이벌, 경쟁자",
+    "context": "...with a rival group of... (경쟁 집단과의...)",
+    "chapter": "Chapter 5: Pirate Ship and the Great Escape"
+  },
+  {
+    "word": "pretend",
+    "meaning": "~인 척하다, 가정하다",
+    "context": "I'm going to pretend it was... (그냥 ~였다고 칠게.)",
+    "chapter": "Chapter 5: Pirate Ship and the Great Escape"
+  },
+  {
+    "word": "rub out / rubbed out",
+    "meaning": "지우다, 지워지다",
+    "context": "...beard was rubbed out... (수염이 싹 문질러 지워졌다!)",
+    "chapter": "Chapter 5: Pirate Ship and the Great Escape"
+  },
+  {
+    "word": "erase / erased",
+    "meaning": "지우다, 소멸하다",
+    "context": "...and my tail was erased! (그리고 내 꼬리는 지워졌어!)",
+    "chapter": "Chapter 5: Pirate Ship and the Great Escape"
+  },
+  {
+    "word": "deserted island",
+    "meaning": "무인도",
+    "context": "사람들이 살지 않는 버려진 섬입니다.",
+    "chapter": "Chapter 5: Pirate Ship and the Great Escape"
+  },
+  {
+    "word": "seamstress",
+    "meaning": "재봉사 (바느질하는 여성)",
+    "context": "옷을 짓거나 꿰매는 일을 전문으로 하는 사람입니다.",
+    "chapter": "Chapter 5: Pirate Ship and the Great Escape"
+  },
+  {
+    "word": "mascot",
+    "meaning": "마스코트",
+    "context": "...the ship's mascot... (배의 마스코트...)",
+    "chapter": "Chapter 5: Pirate Ship and the Great Escape"
+  },
+  {
+    "word": "tentacle",
+    "meaning": "(문어의) 다리, 촉수",
+    "context": "...one of the octopus's tentacles... (문어 다리 중 하나...)",
+    "chapter": "Chapter 5: Pirate Ship and the Great Escape"
+  },
+  {
+    "word": "sewed",
+    "meaning": "바느질했다, 꿰맸다",
+    "context": "...sewed a beard out of... (턱수염을 바느질해 붙였다...)",
+    "chapter": "Chapter 5: Pirate Ship and the Great Escape"
+  },
+  {
+    "word": "blind",
+    "meaning": "시력이 아주 나쁜, 눈이 먼",
+    "context": "She was kind of blind. (그녀는 거의 앞이 보이지 않았다.)",
+    "chapter": "Chapter 5: Pirate Ship and the Great Escape"
+  },
+  {
+    "word": "recipe",
+    "meaning": "레시피, 조리법",
+    "context": "...gave us a recipe for... (우리에게 조리법을 알려주었다...)",
+    "chapter": "Chapter 5: Pirate Ship and the Great Escape"
+  },
+  {
+    "word": "sewing machine",
+    "meaning": "재봉틀",
+    "context": "butt에 어떻게 재봉틀을 대고 바느질을 하냐는 말장난입니다.",
+    "chapter": "Chapter 5: Pirate Ship and the Great Escape"
+  },
+  {
+    "word": "notice",
+    "meaning": "알아채다, 인식하다",
+    "context": "How did we not notice you? (우리가 널 어떻게 못 본 거지?)",
+    "chapter": "Chapter 5: Pirate Ship and the Great Escape"
+  },
+  {
+    "word": "plummet / plummeted",
+    "meaning": "수직으로 추락하다, 곤두박질치다",
+    "context": "...plummeted one whole metre... (겨우 1미터 아래로 툭 떨어졌다...)",
+    "chapter": "Chapter 5: Pirate Ship and the Great Escape"
+  },
+  {
+    "word": "stalling",
+    "meaning": "시간 끌기, 지연 작전",
+    "context": "Stalling them so that... (그들을 지연시킴으로써...)",
+    "chapter": "Chapter 5: Pirate Ship and the Great Escape"
+  },
+  {
+    "word": "deck",
+    "meaning": "갑판",
+    "context": "...onto the deck of a ship... (배의 갑판 위로...)",
+    "chapter": "Chapter 5: Pirate Ship and the Great Escape"
+  },
+  {
+    "word": "untangle",
+    "meaning": "엉킨 것을 풀다",
+    "context": "...untangled themselves... (엉킨 낙하산에서 빠져나왔다...)",
+    "chapter": "Chapter 5: Pirate Ship and the Great Escape"
+  },
+  {
+    "word": "surrounded by",
+    "meaning": "~로 둘러싸인",
+    "context": "...surrounded by a bloodthirsty crew... (잔인한 선원들에 둘러싸였다...)",
+    "chapter": "Chapter 5: Pirate Ship and the Great Escape"
+  },
+  {
+    "word": "parrot",
+    "meaning": "앵무새",
+    "context": "...there's one on that guy's shoulder! (저 사람 어깨에 앵무새가 있어!)",
+    "chapter": "Chapter 5: Pirate Ship and the Great Escape"
+  },
+  {
+    "word": "mutter / muttered",
+    "meaning": "중얼거리다, 투덜대다",
+    "context": "\"See,\" muttered Birdbrain... (\"거봐,\" 버드브레인이 중얼거렸다...)",
+    "chapter": "Chapter 5: Pirate Ship and the Great Escape"
+  },
+  {
+    "word": "terrified",
+    "meaning": "겁에 질린",
+    "context": "Sam and Samantha looked around, terrified. (겁에 질려 둘러보았다.)",
+    "chapter": "Chapter 5: Pirate Ship and the Great Escape"
+  },
+  {
+    "word": "shame",
+    "meaning": "아쉬움, 유감",
+    "context": "\"It's a shame...\" (\"아쉽게 됐군...\")",
+    "chapter": "Chapter 5: Pirate Ship and the Great Escape"
+  },
+  {
+    "word": "mast",
+    "meaning": "돛대",
+    "context": "...hanging on the mast. (돛대에 걸려 있는.)",
+    "chapter": "Chapter 5: Pirate Ship and the Great Escape"
+  },
+  {
+    "word": "teensy, tiny",
+    "meaning": "엄청나게 작은, 쬐그만",
+    "context": "...one, teensy, tiny minute late. (겨우 1분 늦었잖아요.)",
+    "chapter": "Chapter 5: Pirate Ship and the Great Escape"
+  },
+  {
+    "word": "pompom",
+    "meaning": "폼폼 (응원용 털방울)",
+    "context": "I love pompoms, who doesn't? (난 폼폼 좋아해, 안 그래?)",
+    "chapter": "Chapter 5: Pirate Ship and the Great Escape"
+  },
+  {
+    "word": "amused",
+    "meaning": "재미있어하는, 즐거워하는",
+    "context": "The fearsome Captain wasn't amused. (대장은 즐거워하지 않았다.)",
+    "chapter": "Chapter 5: Pirate Ship and the Great Escape"
+  },
+  {
+    "word": "delay",
+    "meaning": "미루다, 연기하다",
+    "context": "...a plan to delay the plank-walking. (판자 걷기 처형을 미루려는 계획.)",
+    "chapter": "Chapter 5: Pirate Ship and the Great Escape"
+  },
+  {
+    "word": "fondly",
+    "meaning": "애정을 갖고, 다정하게",
+    "context": "...looked at it fondly. (그것을 다정하게 바라보았다.)",
+    "chapter": "Chapter 5: Pirate Ship and the Great Escape"
+  },
+  {
+    "word": "sponge",
+    "meaning": "스펀지, 수선",
+    "context": "...pulled out a little sponge... (작은 스펀지 공룡을 꺼냈다.)",
+    "chapter": "Chapter 5: Pirate Ship and the Great Escape"
+  },
+  {
+    "word": "poop deck",
+    "meaning": "선미 갑판",
+    "context": "배의 꽁무니(뒤편)에 있는 가장 높은 갑판 이름입니다.",
+    "chapter": "Chapter 5: Pirate Ship and the Great Escape"
+  },
+  {
+    "word": "spit",
+    "meaning": "침",
+    "context": "...a little bubble of spit flew... (작은 침방울 하나가 날아갔다...)",
+    "chapter": "Chapter 5: Pirate Ship and the Great Escape"
+  },
+  {
+    "word": "slow motion",
+    "meaning": "느린 화면 (슬로우 모션)",
+    "context": "It was like in slow motion. (느린 동작으로 움직이는 것 같았다.)",
+    "chapter": "Chapter 5: Pirate Ship and the Great Escape"
+  },
+  {
+    "word": "glare / glared",
+    "meaning": "노려보다, 쏘아보다",
+    "context": "...and glared at the group... (그리고 무리들을 노려보았다...)",
+    "chapter": "Chapter 5: Pirate Ship and the Great Escape"
+  },
+  {
+    "word": "cannon",
+    "meaning": "대포",
+    "context": "...landed on the cannon... (대포 위에 올라앉았다...)",
+    "chapter": "Chapter 5: Pirate Ship and the Great Escape"
+  },
+  {
+    "word": "screech",
+    "meaning": "꽥 비명을 지르다",
+    "context": "Birdbrain screeched... (버드브레인이 꽥꽥 소리를 질렀다...)",
+    "chapter": "Chapter 5: Pirate Ship and the Great Escape"
+  },
+  {
+    "word": "rub / rubbed",
+    "meaning": "비비다, 마찰하다",
+    "context": "The rope ... rubbed so fast... (밧줄이 너무 빨리 마찰되어서...)",
+    "chapter": "Chapter 5: Pirate Ship and the Great Escape"
+  },
+  {
+    "word": "catch fire",
+    "meaning": "불이 붙다",
+    "context": "...it caught fire... (거기에 불이 붙었다!)",
+    "chapter": "Chapter 5: Pirate Ship and the Great Escape"
+  },
+  {
+    "word": "scurvy",
+    "meaning": "천한, 비열한",
+    "context": "...you scurvy bouncy bouncy bouncers! (이 비열하게 뛰어다니는 놈들!)",
+    "chapter": "Chapter 5: Pirate Ship and the Great Escape"
+  },
+  {
+    "word": "dizzy",
+    "meaning": "어지러운",
+    "context": "...making me dizzy! (나를 어지럽게 만드는구나!)",
+    "chapter": "Chapter 5: Pirate Ship and the Great Escape"
+  },
+  {
+    "word": "springboard",
+    "meaning": "도약판 (트램펄린)",
+    "context": "...springboarded into the air... (하늘로 탄성을 이용해 튀어 올라...)",
+    "chapter": "Chapter 5: Pirate Ship and the Great Escape"
+  },
+  {
+    "word": "pile",
+    "meaning": "더미, 쌓아 놓은 것",
+    "context": "...landed in a pile of... (쌓여 있는 더미 위로 떨어졌다...)",
+    "chapter": "Chapter 5: Pirate Ship and the Great Escape"
+  },
+  {
+    "word": "seagull",
+    "meaning": "갈매기",
+    "context": "...hit a seagull flying... (날아가는 갈매기를 맞춰서...)",
+    "chapter": "Chapter 5: Pirate Ship and the Great Escape"
+  },
+  {
+    "word": "slump / slumped",
+    "meaning": "털썩 앉다, 어깨를 늘어뜨리다",
+    "context": "He slumped his shoulders. (그는 어깨를 힘없이 축 늘어뜨렸다.)",
+    "chapter": "Chapter 5: Pirate Ship and the Great Escape"
+  },
+  {
+    "word": "afford",
+    "meaning": "~할 경제적 여유가 되다",
+    "context": "We couldn't afford real cannon balls. (우린 진짜 대포알을 살 돈이 없었거든.)",
+    "chapter": "Chapter 5: Pirate Ship and the Great Escape"
+  },
+  {
+    "word": "flaming",
+    "meaning": "타오르는, 불길에 휩싸인",
+    "context": "The flaming rope sizzled. (불타는 밧줄이 지글거렸다.)",
+    "chapter": "Chapter 5: Pirate Ship and the Great Escape"
+  },
+  {
+    "word": "sizzle / sizzled",
+    "meaning": "지글지글 소리를 내다",
+    "context": "프라이팬 등에서 기름이 끓거나 타는 소리입니다.",
+    "chapter": "Chapter 5: Pirate Ship and the Great Escape"
+  },
+  {
+    "word": "scissors",
+    "meaning": "가위",
+    "context": "...grabbed a pair of scissors... (가위 한 개를 집어 들었다...)",
+    "chapter": "Chapter 5: Pirate Ship and the Great Escape"
+  },
+  {
+    "word": "lean over / leant over",
+    "meaning": "몸을 굽히다",
+    "context": "...leant over the pie... (파이 위로 몸을 숙였다...)",
+    "chapter": "Chapter 5: Pirate Ship and the Great Escape"
+  },
+  {
+    "word": "squish / squished",
+    "meaning": "으깨지다, 짜부라지다",
+    "context": "...and squished it into... (그리고 얼굴에 파이를 뭉개버렸다.)",
+    "chapter": "Chapter 5: Pirate Ship and the Great Escape"
+  },
+  {
+    "word": "ignite / ignited",
+    "meaning": "불을 붙이다, 점화하다",
+    "context": "...the flaming rope ignited the cannon... (밧줄이 대포를 점화했다...)",
+    "chapter": "Chapter 5: Pirate Ship and the Great Escape"
+  },
+  {
+    "word": "shoot out / shot out",
+    "meaning": "쏘아져 나오다, 급격히 튀다",
+    "context": "...bouncy cannon balls shot out everywhere. (탱탱볼이 사방으로 날아갔다.)",
+    "chapter": "Chapter 5: Pirate Ship and the Great Escape"
+  },
+  {
+    "word": "snip off / snipped off",
+    "meaning": "싹둑 잘라내다",
+    "context": "...snipped off the rope belts... (밧줄 허리띠를 싹둑 잘랐다...)",
+    "chapter": "Chapter 5: Pirate Ship and the Great Escape"
+  },
+  {
+    "word": "leapt",
+    "meaning": "도약했다, 뛰었다",
+    "context": "leap의 과거형으로, 세게 뛰어오른 것을 뜻합니다.",
+    "chapter": "Chapter 5: Pirate Ship and the Great Escape"
+  },
+  {
+    "word": "chase",
+    "meaning": "뒤쫓다, 추적하다",
+    "context": "The crew started to chase them... (선원들이 쫓아오기 시작했다...)",
+    "chapter": "Chapter 5: Pirate Ship and the Great Escape"
+  },
+  {
+    "word": "underwear",
+    "meaning": "속옷",
+    "context": "...everyone saw their underwear... (모두 그들의 팬티를 보게 되었다...)",
+    "chapter": "Chapter 5: Pirate Ship and the Great Escape"
+  },
+  {
+    "word": "trip / tripped",
+    "meaning": "발이 걸려 넘어지다",
+    "context": "...they tripped and fell flat... (발이 꼬여 납작하게 엎어졌다.)",
+    "chapter": "Chapter 5: Pirate Ship and the Great Escape"
+  },
+  {
+    "word": "so long, suckers",
+    "meaning": "잘 가라, 바보 녀석들아",
+    "context": "SUCKERS! (조롱하며 비웃는 비속어성 작별 인사입니다.)",
+    "chapter": "Chapter 5: Pirate Ship and the Great Escape"
+  },
+  {
+    "word": "puppeteer",
+    "meaning": "인형 조종극 배우",
+    "context": "실로 인형을 움직여 극을 하는 연기자입니다.",
+    "chapter": "Chapter 5: Pirate Ship and the Great Escape"
+  },
+  {
+    "word": "cabbage",
+    "meaning": "양배추",
+    "context": "\"I eat cabbage.\" (\"나 양배추 먹어.\")",
+    "chapter": "Chapter 5: Pirate Ship and the Great Escape"
+  },
+  {
+    "word": "customer",
+    "meaning": "고객, 손님",
+    "context": "And the customer was happy? (고객도 기뻐했니?)",
+    "chapter": "Chapter 5: Pirate Ship and the Great Escape"
+  },
+  {
+    "word": "definitely",
+    "meaning": "분명히, 확실하게",
+    "context": "And you definitely didn't say... (그리고 진짜 확실히 안 말했겠지?)",
+    "chapter": "Chapter 5: Pirate Ship and the Great Escape"
+  },
+  {
+    "word": "ashamed",
+    "meaning": "부끄러워하는, 창피한",
+    "context": "Birdbrain looked ashamed. (버드브레인은 창피한 기색을 보였다.)",
+    "chapter": "Chapter 5: Pirate Ship and the Great Escape"
+  },
+  {
+    "word": "pimple",
+    "meaning": "여드름",
+    "context": "얼굴에 생기는 종기 같은 뾰루지입니다.",
+    "chapter": "Chapter 5: Pirate Ship and the Great Escape"
+  },
+  {
+    "word": "pineapple",
+    "meaning": "파인애플",
+    "context": "노란색의 맛있는 열대 과일입니다.",
+    "chapter": "Chapter 5: Pirate Ship and the Great Escape"
+  },
+  {
+    "word": "pinecone",
+    "meaning": "솔방울",
+    "context": "소나무의 열매인 단단한 솔방울입니다.",
+    "chapter": "Chapter 5: Pirate Ship and the Great Escape"
+  },
+  {
+    "word": "porpoise",
+    "meaning": "까치돌고래",
+    "context": "돌고래와 유사한 소형 고래 동물입니다.",
+    "chapter": "Chapter 5: Pirate Ship and the Great Escape"
+  },
+  {
+    "word": "paleoclimatologist",
+    "meaning": "고기후학자",
+    "context": "고대의 기후 변화 역사와 빙하 등을 연구하는 학자입니다.",
+    "chapter": "Chapter 5: Pirate Ship and the Great Escape"
+  },
+  {
+    "word": "thump / thumping",
+    "meaning": "쾅 치다",
+    "context": "...thumping the desk... (책상을 쾅 내려치며...)",
+    "chapter": "Chapter 5: Pirate Ship and the Great Escape"
+  },
+  {
+    "word": "bolt / bolted",
+    "meaning": "급히 달아나다",
+    "context": "...bolted out the door... (문밖으로 도망쳐 나갔다...)",
+    "chapter": "Chapter 5: Pirate Ship and the Great Escape"
+  },
+  {
+    "word": "stunned",
+    "meaning": "깜짝 놀라 망연자실한",
+    "context": "The boss was stunned. (사장님은 멍해졌다.)",
+    "chapter": "Chapter 5: Pirate Ship and the Great Escape"
+  },
+  {
+    "word": "sarcastic remark",
+    "meaning": "빈정대는 말, 비꼬는 한마디",
+    "context": "...make a sarcastic remark. (비꼬는 한마디 대꾸도 안 하네.)",
+    "chapter": "Chapter 5: Pirate Ship and the Great Escape"
+  },
+  {
+    "word": "scare off",
+    "meaning": "겁주어 쫓아내다",
+    "context": "...what scared him off... (무엇이 그를 도망치게 했는지...)",
+    "chapter": "Chapter 5: Pirate Ship and the Great Escape"
+  },
+  {
+    "word": "putrid",
+    "meaning": "썩은 냄새가 나는, 부패한",
+    "context": "...something that smelt really, really putrid. (정말 썩은 악취가 나는 것.)",
+    "chapter": "Chapter 5: Pirate Ship and the Great Escape"
+  },
+  {
+    "word": "screech in protest",
+    "meaning": "삐걱거리며 비명을 지르다",
+    "context": "...chair screeching in protest. (의자가 삐걱대며 돌아갔다.)",
+    "chapter": "Chapter 5: Pirate Ship and the Great Escape"
+  },
+  {
+    "word": "widen / widened",
+    "meaning": "넓어지다, 크게 떠지다",
+    "context": "Her eyes widened as she saw... (그것을 보며 그녀의 눈이 크게 떠졌다...)",
+    "chapter": "Chapter 5: Pirate Ship and the Great Escape"
+  },
+  {
+    "word": "In the nick of time",
+    "meaning": "아슬아슬하게 제시간에",
+    "context": "예문: *Cowboy caught him just in the nick of time.* (카우보이가 그를 정말 아슬아슬하게 딱 맞춰서 잡았다.)\n팁: 어떤 일이 늦기 전에 막판에 극적으로 처리되었을 때 유용하게 쓰이는 아주 유명한 숙어입니다.",
+    "chapter": "주요 숙어 및 관용구 (Useful Phrases)"
+  },
+  {
+    "word": "Out of control",
+    "meaning": "통제 불능의 / 걷잡을 수 없는",
+    "context": "예문: *Level OUT OF CONTROL - it was in capital letters because it was so fast.*\n팁: 기계가 마음대로 통제가 안 되거나, 상황이 수습이 불가능할 정도로 극단적일 때 사용합니다.",
+    "chapter": "주요 숙어 및 관용구 (Useful Phrases)"
+  },
+  {
+    "word": "Rely on",
+    "meaning": "~~에 의지하다 / 믿다",
+    "context": "예문: *I am relying on you two buffoons to get this done.*\n팁: 다른 사람을 믿고 책임을 맡길 때 쓰는 중요 단어입니다. `depend on`과 유사하게 쓰입니다.",
+    "chapter": "주요 숙어 및 관용구 (Useful Phrases)"
+  },
+  {
+    "word": "Let someone down",
+    "meaning": "~~를 실망시키다",
+    "context": "예문: *We won't let you down.* (당신을 실망하게 해 드리지 않을게요.)\n팁: 기대에 부응하지 못해 상대방을 실망하게 만들 때 씁니다.",
+    "chapter": "주요 숙어 및 관용구 (Useful Phrases)"
+  },
+  {
+    "word": "Work it out",
+    "meaning": "해결하다 / 알아내다",
+    "context": "예문: *Anyway, we'll work it out.* (어찌 되었건 우린 해결해 낼 거야.)\n팁: 복잡한 문제나 난관을 고민하고 노력해서 풀어나갈 때 자주 사용됩니다.",
+    "chapter": "주요 숙어 및 관용구 (Useful Phrases)"
+  },
+  {
+    "word": "Two peas in a pod",
+    "meaning": "똑 닮은 한 쌍 / 단짝",
+    "context": "예문: *It's like we're two peas in a pod!* (마치 우리는 한 꼬투리 안의 완두콩 두 알 같아!)\n팁: 생김새가 매우 닮았거나 행동, 생각이 일치하는 두 사람을 재미있게 비유할 때 씁니다.",
+    "chapter": "주요 숙어 및 관용구 (Useful Phrases)"
+  }
+];
+    
+    // --- App State ---
+    let vocabulary = [...VOCABULARY_DATA];
+    let selectedChapters = new Set();
+    let currentConfig = {
+      questionCount: 10,
+      studyMode: 'quiz' // 'quiz' or 'flashcard'
+    };
+    
+    // Starred words set (stored as word string arrays in localStorage)
+    let starredWords = new Set(JSON.parse(localStorage.getItem('starred_words') || '[]'));
+    
+    // Session State
+    let sessionWords = [];
+    let currentQuestionIndex = 0;
+    let sessionScore = 0;
+    let answersLog = []; // { wordObj, isCorrect, userAnswer }
+    let autoAdvanceTimeout = null;
+    let synth = window.speechSynthesis;
+    let audioCtx = null;
+    
+    // Dictionary State
+    let dictFilteredWords = [];
+    let dictCurrentPage = 1;
+    const DICT_ITEMS_PER_PAGE = 12;
+    let dictShowStarredOnly = false;
+    
+    // --- Synthesizer Sound Engine ---
+    function initAudio() {
+      if (!audioCtx) {
+        audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+      }
+    }
+    
+    function playBeep(correct) {
+      try {
+        initAudio();
+        if (!audioCtx) return;
+        
+        const osc = audioCtx.createOscillator();
+        const gain = audioCtx.createGain();
+        osc.connect(gain);
+        gain.connect(audioCtx.destination);
+        
+        if (correct) {
+          // Play a pleasant double chime
+          osc.frequency.setValueAtTime(523.25, audioCtx.currentTime); // C5
+          gain.gain.setValueAtTime(0.08, audioCtx.currentTime);
+          osc.start();
+          osc.frequency.setValueAtTime(659.25, audioCtx.currentTime + 0.1); // E5
+          gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.35);
+          osc.stop(audioCtx.currentTime + 0.35);
+        } else {
+          // Play a low flat warning tone
+          osc.type = 'triangle';
+          osc.frequency.setValueAtTime(180, audioCtx.currentTime); // F#3
+          gain.gain.setValueAtTime(0.12, audioCtx.currentTime);
+          osc.start();
+          gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.4);
+          osc.stop(audioCtx.currentTime + 0.4);
+        }
+      } catch (e) {
+        console.warn("Sound generation failed", e);
+      }
+    }
+    
+    // --- Text To Speech ---
+    function speakWord(text) {
+      if (!synth) return;
+      // Cancel active speaking
+      synth.cancel();
+      const utterance = new SpeechSynthesisUtterance(text);
+      utterance.lang = 'en-US';
+      utterance.rate = 0.9; // Slightly slower for clear instruction
+      
+      // Select appropriate English voice
+      const voices = synth.getVoices();
+      const enVoice = voices.find(voice => voice.lang.startsWith('en-') && voice.name.includes('Google')) ||
+                      voices.find(voice => voice.lang.startsWith('en-'));
+      if (enVoice) utterance.voice = enVoice;
+      
+      synth.speak(utterance);
+    }
+    
+    // --- Theme Management ---
+    const themeToggleBtn = document.getElementById('theme-toggle');
+    const moonIcon = document.getElementById('moon-icon');
+    const sunIcon = document.getElementById('sun-icon');
+    
+    // Default system color-scheme listener
+    let systemTheme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+    let savedTheme = localStorage.getItem('theme') || systemTheme;
+    document.documentElement.setAttribute('data-theme', savedTheme);
+    updateThemeIcons(savedTheme);
+    
+    themeToggleBtn.addEventListener('click', () => {
+      let currentTheme = document.documentElement.getAttribute('data-theme');
+      let newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+      document.documentElement.setAttribute('data-theme', newTheme);
+      localStorage.setItem('theme', newTheme);
+      updateThemeIcons(newTheme);
+      showToast(newTheme === 'dark' ? '다크 모드로 전환되었습니다 🌙' : '라이트 모드로 전환되었습니다 ☀️', '🎨');
+    });
+    
+    function updateThemeIcons(theme) {
+      if (theme === 'dark') {
+        moonIcon.style.display = 'none';
+        sunIcon.style.display = 'block';
+      } else {
+        moonIcon.style.display = 'block';
+        sunIcon.style.display = 'none';
+      }
+    }
+    
+    // --- Notification Toast ---
+    function showToast(text, icon = '📢') {
+      const toast = document.getElementById('toast-message');
+      document.getElementById('toast-icon').textContent = icon;
+      document.getElementById('toast-text').textContent = text;
+      toast.classList.add('visible');
+      setTimeout(() => {
+        toast.classList.remove('visible');
+      }, 2500);
+    }
+    
+    // --- Bookmark (Starred) Logic ---
+    function toggleStarred(word, element) {
+      if (starredWords.has(word)) {
+        starredWords.delete(word);
+        if (element) element.classList.remove('starred');
+        showToast('북마크가 취소되었습니다.', '⭐');
+      } else {
+        starredWords.add(word);
+        if (element) element.classList.add('starred');
+        showToast('단어가 북마크에 저장되었습니다.', '⭐');
+      }
+      localStorage.setItem('starred_words', JSON.stringify(Array.from(starredWords)));
+      updateStarredBadges();
+      
+      // If we're on the dictionary tab, we might need to refresh if filtering
+      if (dictShowStarredOnly) {
+        refreshDictFilteredList();
+      }
+    }
+    
+    function updateStarredBadges() {
+      const count = starredWords.size;
+      document.getElementById('starred-count-badge').textContent = count;
+      const startStarredBtn = document.getElementById('start-starred-btn');
+      if (count === 0) {
+        startStarredBtn.disabled = true;
+        startStarredBtn.style.opacity = 0.5;
+        startStarredBtn.style.cursor = 'not-allowed';
+      } else {
+        startStarredBtn.disabled = false;
+        startStarredBtn.style.opacity = 1;
+        startStarredBtn.style.cursor = 'pointer';
+      }
+    }
+    
+    // --- Views Switcher ---
+    function switchView(viewId) {
+      document.querySelectorAll('.view-section').forEach(section => {
+        section.classList.remove('active');
+      });
+      
+      const targetView = document.getElementById(`view-${viewId}`);
+      if (targetView) targetView.classList.add('active');
+      
+      // Toggle tab buttons state
+      document.getElementById('tab-dashboard').classList.remove('active');
+      document.getElementById('tab-dictionary').classList.remove('active');
+      
+      if (viewId === 'dashboard') {
+        document.getElementById('tab-dashboard').classList.add('active');
+      } else if (viewId === 'dictionary') {
+        document.getElementById('tab-dictionary').classList.add('active');
+        refreshDictionaryTab();
+      }
+      
+      // Clear timers or audio if switching back to dashboard
+      if (viewId === 'dashboard') {
+        if (autoAdvanceTimeout) clearTimeout(autoAdvanceTimeout);
+        if (synth) synth.cancel();
+      }
+    }
+    
+    // --- Drag and Drop Parser for custom Markdown ---
+    const dropzone = document.getElementById('file-dropzone');
+    const fileUpload = document.getElementById('file-upload');
+    
+    ['dragenter', 'dragover'].forEach(eventName => {
+      dropzone.addEventListener(eventName, (e) => {
+        e.preventDefault();
+        dropzone.classList.add('dragover');
+      }, false);
+    });
+    
+    ['dragleave', 'drop'].forEach(eventName => {
+      dropzone.addEventListener(eventName, (e) => {
+        e.preventDefault();
+        dropzone.classList.remove('dragover');
+      }, false);
+    });
+    
+    dropzone.addEventListener('drop', (e) => {
+      const dt = e.dataTransfer;
+      const files = dt.files;
+      if (files.length) handleFileUpload(files[0]);
+    });
+    
+    fileUpload.addEventListener('change', (e) => {
+      if (fileUpload.files.length) handleFileUpload(fileUpload.files[0]);
+    });
+    
+    function handleFileUpload(file) {
+      const reader = new FileReader();
+      reader.onload = function(e) {
+        const text = e.target.result;
+        try {
+          const parsedData = parseMDVocabulary(text);
+          if (parsedData.length === 0) {
+            showToast('유효한 단어 데이터를 찾을 수 없습니다.', '❌');
+            return;
+          }
+          vocabulary = parsedData;
+          showToast(`${parsedData.length}개의 단어가 성공적으로 로드되었습니다!`, '✅');
+          initializeChapters();
+          refreshDictionaryTab();
+        } catch (error) {
+          console.error(error);
+          showToast('파일 파싱에 실패했습니다.', '❌');
+        }
+      };
+      reader.readAsText(file, 'utf-8');
+    }
+    
+    // Client-side Javascript parsing logic for Cowboy md tables
+    function parseMDVocabulary(markdownText) {
+      const lines = markdownText.split('\n');
+      const list = [];
+      let currentChapter = "사용자 지정 챕터";
+      let inTable = false;
+      let inPhrases = false;
+      let currentPhrase = null;
+      
+      for (let i = 0; i < lines.length; i++) {
+        const line = lines[i].trim();
+        
+        // Header detection
+        const chapterMatch = line.match(/^##\s+(?:📖|💡)\s*(.*?)$/);
+        if (chapterMatch) {
+          currentChapter = chapterMatch[1].trim();
+          inPhrases = currentChapter.includes("주요 숙어") || currentChapter.includes("Phrases");
+          inTable = false;
+          continue;
+        }
+        
+        if (!inPhrases) {
+          if (line.startsWith('|') && !line.startsWith('| :---')) {
+            const parts = line.split('|').map(p => p.trim()).slice(1, -1);
+            if (parts.length >= 2) {
+              const word = parts[0].replace(/\*\*/g, '').trim();
+              const meaning = parts[1].replace(/\*\*/g, '').trim();
+              const context = parts[2] ? parts[2].replace(/\*\*/g, '').trim() : "";
+              
+              if (word === "단어/표현" || word === "단어" || word === "표현") {
+                inTable = true;
+                continue;
+              }
+              
+              if (inTable && word && meaning) {
+                list.push({ word, meaning, context, chapter: currentChapter });
+              }
+            }
+          }
+        } else {
+          // Parse numbered lists
+          const phraseHeaderMatch = line.match(/^\d+\.\s+\*\*(.*?)\s*\((.*?)\)\*\*/);
+          if (phraseHeaderMatch) {
+            if (currentPhrase) {
+              list.push(currentPhrase);
+            }
+            currentPhrase = {
+              word: phraseHeaderMatch[1].trim(),
+              meaning: phraseHeaderMatch[2].trim(),
+              context: "",
+              chapter: currentChapter
+            };
+          } else if (currentPhrase && line.startsWith('*')) {
+            const cleanDetail = line.replace(/^\*\s*/, '').trim().replace(/\*\*/g, '');
+            if (currentPhrase.context) {
+              currentPhrase.context += "\n" + cleanDetail;
+            } else {
+              currentPhrase.context = cleanDetail;
+            }
+          }
+        }
+      }
+      
+      if (currentPhrase) {
+        list.push(currentPhrase);
+      }
+      
+      return list;
+    }
+    
+    // --- Dashboard Initializations ---
+    function initializeChapters() {
+      const container = document.getElementById('chapter-list-container');
+      container.innerHTML = '';
+      
+      // Group by chapters
+      const chaptersInfo = {};
+      vocabulary.forEach(item => {
+        chaptersInfo[item.chapter] = (chaptersInfo[item.chapter] || 0) + 1;
+      });
+      
+      // Add '전체 선택' card first
+      const totalWords = vocabulary.length;
+      
+      const allChaptersCard = document.createElement('button');
+      allChaptersCard.type = 'button';
+      allChaptersCard.className = 'chapter-card selected';
+      allChaptersCard.id = 'chapter-all-card';
+      allChaptersCard.innerHTML = `
+        <div class="chapter-info">
+          <span class="chapter-name">✨ 전체 단어 학습</span>
+          <span class="chapter-count">모든 단어와 표현 테스트</span>
+        </div>
+        <span class="chapter-count">${totalWords} 단어</span>
+      `;
+      allChaptersCard.onclick = () => selectAllChapters();
+      container.appendChild(allChaptersCard);
+      
+      selectedChapters.clear(); // Empty selected means default ALL
+      
+      // Individual chapters
+      for (const [chName, count] of Object.entries(chaptersInfo)) {
+        const card = document.createElement('button');
+        card.type = 'button';
+        card.className = 'chapter-card';
+        card.innerHTML = `
+          <div class="chapter-info">
+            <span class="chapter-name">${chName}</span>
+            <span class="chapter-count">이 챕터만 선택하여 집중 학습</span>
+          </div>
+          <span class="chapter-count">${count} 단어</span>
+        `;
+        card.onclick = (e) => toggleChapter(chName, card);
+        container.appendChild(card);
+      }
+      
+      // Setup dictionary chapter options
+      const dictSelect = document.getElementById('dict-chapter-select');
+      dictSelect.innerHTML = '<option value="all">모든 챕터 보기</option>';
+      for (const chName of Object.keys(chaptersInfo)) {
+        const opt = document.createElement('option');
+        opt.value = chName;
+        opt.textContent = chName;
+        dictSelect.appendChild(opt);
+      }
+    }
+    
+    function selectAllChapters() {
+      selectedChapters.clear();
+      document.querySelectorAll('.chapter-card').forEach(card => {
+        card.classList.remove('selected');
+      });
+      document.getElementById('chapter-all-card').classList.add('selected');
+      showToast('전체 챕터가 선택되었습니다.', '📖');
+    }
+    
+    function toggleChapter(chName, cardElement) {
+      // Remove all-select state
+      document.getElementById('chapter-all-card').classList.remove('selected');
+      
+      if (selectedChapters.has(chName)) {
+        selectedChapters.delete(chName);
+        cardElement.classList.remove('selected');
+      } else {
+        selectedChapters.add(chName);
+        cardElement.classList.add('selected');
+      }
+      
+      if (selectedChapters.size === 0) {
+        document.getElementById('chapter-all-card').classList.add('selected');
+      }
+    }
+    
+    function setConfig(key, value, element) {
+      currentConfig[key] = value;
+      // Toggle active states in parent segmented control
+      element.parentNode.querySelectorAll('.seg-btn').forEach(btn => {
+        btn.classList.remove('active');
+      });
+      element.classList.add('active');
+    }
+    
+    // --- Quiz Engine Logic ---
+    
+    function startSession() {
+      // 1. Gather vocabulary pool
+      let pool = [];
+      if (selectedChapters.size === 0) {
+        pool = [...vocabulary];
+      } else {
+        pool = vocabulary.filter(item => selectedChapters.has(item.chapter));
+      }
+      
+      if (pool.length === 0) {
+        showToast('선택한 챕터에 학습할 단어가 없습니다!', '⚠️');
+        return;
+      }
+      
+      // Shuffle pool
+      pool = shuffleArray(pool);
+      
+      // Limit count
+      let limit = currentConfig.questionCount;
+      if (limit !== 'all') {
+        limit = parseInt(limit);
+        pool = pool.slice(0, Math.min(limit, pool.length));
+      }
+      
+      sessionWords = pool;
+      currentQuestionIndex = 0;
+      sessionScore = 0;
+      answersLog = [];
+      
+      initAudio(); // Initialize audio context on user action
+      
+      if (currentConfig.studyMode === 'quiz') {
+        switchView('quiz');
+        loadQuizQuestion();
+      } else {
+        switchView('flashcard');
+        loadFlashcard();
+      }
+    }
+    
+    function startStarredSession() {
+      if (starredWords.size === 0) {
+        showToast('북마크된 단어가 없습니다.', '⚠️');
+        return;
+      }
+      
+      let pool = vocabulary.filter(item => starredWords.has(item.word));
+      pool = shuffleArray(pool);
+      
+      sessionWords = pool;
+      currentQuestionIndex = 0;
+      sessionScore = 0;
+      answersLog = [];
+      
+      initAudio();
+      
+      if (currentConfig.studyMode === 'quiz') {
+        switchView('quiz');
+        loadQuizQuestion();
+      } else {
+        switchView('flashcard');
+        loadFlashcard();
+      }
+    }
+    
+    function loadQuizQuestion() {
+      if (currentQuestionIndex >= sessionWords.length) {
+        finishSession();
+        return;
+      }
+      
+      const currentWord = sessionWords[currentQuestionIndex];
+      
+      // Update Progress UI
+      document.getElementById('quiz-progress-text').textContent = `문제 ${currentQuestionIndex + 1} / ${sessionWords.length}`;
+      document.getElementById('quiz-score-live').textContent = `정답: ${sessionScore}`;
+      const percentage = (currentQuestionIndex / sessionWords.length) * 100;
+      document.getElementById('quiz-progress-indicator').style.width = `${percentage}%`;
+      
+      // Reset card actions and contents
+      document.getElementById('quiz-word-text').textContent = currentWord.word;
+      document.getElementById('quiz-chapter-tag').textContent = currentWord.chapter;
+      
+      // Setup TTS button
+      document.getElementById('quiz-tts-btn').onclick = () => speakWord(currentWord.word);
+      
+      // Setup Star button
+      const starBtn = document.getElementById('quiz-star-btn');
+      starBtn.className = starredWords.has(currentWord.word) ? 'card-action-btn starred' : 'card-action-btn';
+      starBtn.onclick = () => toggleStarred(currentWord.word, starBtn);
+      
+      // Close hint panel
+      const hintPanel = document.getElementById('quiz-context-panel');
+      hintPanel.classList.remove('visible');
+      
+      if (currentWord.context) {
+        // Highlight word in the context sentence
+        let highlightedContext = currentWord.context;
+        // Escape special regex chars
+        const escWord = currentWord.word.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&');
+        // Handle variations (like -ed, -ing, plurals)
+        const regex = new RegExp(`(${escWord}\\w*)`, 'gi');
+        highlightedContext = highlightedContext.replace(regex, `<strong>$1</strong>`);
+        
+        hintPanel.innerHTML = highlightedContext.replace(/\n/g, '<br>');
+        document.getElementById('quiz-hint-toggle').style.display = 'flex';
+      } else {
+        document.getElementById('quiz-hint-toggle').style.display = 'none';
+      }
+      
+      // Speak word automatically on load
+      speakWord(currentWord.word);
+      
+      // Disable next button
+      document.getElementById('quiz-next-btn').disabled = true;
+      
+      // Generate Options
+      generateOptions(currentWord);
+    }
+    
+    function generateOptions(wordObj) {
+      const container = document.getElementById('quiz-options-container');
+      container.innerHTML = '';
+      
+      // Pick 3 random wrong options
+      let distractors = [];
+      const others = vocabulary.filter(item => item.meaning !== wordObj.meaning);
+      const shuffledOthers = shuffleArray(others);
+      
+      // We want distinct meanings
+      const selectedMeanings = new Set([wordObj.meaning]);
+      for (const item of shuffledOthers) {
+        if (!selectedMeanings.has(item.meaning)) {
+          distractors.push(item.meaning);
+          selectedMeanings.add(item.meaning);
+        }
+        if (distractors.length >= 3) break;
+      }
+      
+      // If we couldn't find enough unique distractors (fallback)
+      while (distractors.length < 3) {
+        distractors.push("임의의 뜻 " + distractors.length);
+      }
+      
+      // Combine and shuffle options
+      const allChoices = [
+        { text: wordObj.meaning, isCorrect: true },
+        ...distractors.map(d => ({ text: d, isCorrect: false }))
+      ];
+      const shuffledChoices = shuffleArray(allChoices);
+      
+      shuffledChoices.forEach((choice, index) => {
+        const optionIndex = index + 1;
+        const btn = document.createElement('button');
+        btn.type = 'button';
+        btn.className = 'option-btn';
+        btn.innerHTML = `
+          <span class="option-badge">${optionIndex}</span>
+          <span class="option-text">${choice.text}</span>
+        `;
+        
+        btn.onclick = () => selectOption(btn, choice.isCorrect, choice.text, wordObj);
+        container.appendChild(btn);
+      });
+    }
+    
+    function selectOption(selectedBtn, isCorrect, chosenText, wordObj) {
+      const container = document.getElementById('quiz-options-container');
+      const buttons = container.querySelectorAll('.option-btn');
+      
+      // Disable further clicks
+      buttons.forEach(btn => btn.disabled = true);
+      
+      // Log choice
+      answersLog.push({
+        wordObj: wordObj,
+        isCorrect: isCorrect,
+        userAnswer: chosenText
+      });
+      
+      // Trigger sounds and style modifications
+      if (isCorrect) {
+        selectedBtn.classList.add('correct');
+        sessionScore++;
+        playBeep(true);
+      } else {
+        selectedBtn.classList.add('incorrect');
+        playBeep(false);
+        // Highlight correct option
+        buttons.forEach(btn => {
+          const text = btn.querySelector('.option-text').textContent;
+          if (text === wordObj.meaning) {
+            btn.classList.add('correct');
+          }
+        });
+      }
+      
+      // Update live score
+      document.getElementById('quiz-score-live').textContent = `정답: ${sessionScore}`;
+      
+      // Enable next button
+      const nextBtn = document.getElementById('quiz-next-btn');
+      nextBtn.disabled = false;
+      
+      // Auto advance option
+      const autoAdvance = document.getElementById('auto-advance-chk').checked;
+      if (autoAdvance) {
+        autoAdvanceTimeout = setTimeout(() => {
+          nextQuestion();
+        }, 1500);
+      }
+    }
+    
+    function nextQuestion() {
+      if (autoAdvanceTimeout) clearTimeout(autoAdvanceTimeout);
+      currentQuestionIndex++;
+      loadQuizQuestion();
+    }
+    
+    function toggleQuizHint() {
+      const panel = document.getElementById('quiz-context-panel');
+      panel.classList.toggle('visible');
+    }
+    
+    // --- Keyboard Event Handler ---
+    window.addEventListener('keydown', (e) => {
+      // 1. Handle Quiz Key Bindings
+      const quizActive = document.getElementById('view-quiz').classList.contains('active');
+      if (quizActive) {
+        const optionKeys = ['1', '2', '3', '4'];
+        if (optionKeys.includes(e.key)) {
+          const optionIndex = parseInt(e.key) - 1;
+          const container = document.getElementById('quiz-options-container');
+          const buttons = container.querySelectorAll('.option-btn');
+          
+          // Verify buttons exist and are not disabled
+          if (buttons.length > optionIndex && !buttons[optionIndex].disabled) {
+            buttons[optionIndex].click();
+          }
+        }
+        
+        // Enter or Space key for Next
+        if ((e.key === 'Enter' || e.key === ' ') && !document.getElementById('quiz-next-btn').disabled) {
+          e.preventDefault();
+          nextQuestion();
+        }
+      }
+      
+      // 2. Handle Flashcard Key Bindings
+      const cardActive = document.getElementById('view-flashcard').classList.contains('active');
+      if (cardActive) {
+        if (e.key === ' ' || e.key === 'ArrowUp' || e.key === 'ArrowDown') {
+          e.preventDefault();
+          flipCard();
+        }
+        if (e.key === '1' || e.key === 'ArrowLeft') {
+          cardAction(false); // Again
+        }
+        if (e.key === '2' || e.key === 'ArrowRight') {
+          cardAction(true); // Know
+        }
+      }
+    });
+    
+    // --- Flashcard Mode Logic ---
+    function loadFlashcard() {
+      if (currentQuestionIndex >= sessionWords.length) {
+        finishSession();
+        return;
+      }
+      
+      const currentWord = sessionWords[currentQuestionIndex];
+      
+      // Update Card Progress UI
+      document.getElementById('card-progress-text').textContent = `카드 ${currentQuestionIndex + 1} / ${sessionWords.length}`;
+      const percentage = (currentQuestionIndex / sessionWords.length) * 100;
+      document.getElementById('card-progress-indicator').style.width = `${percentage}%`;
+      
+      // Reset card flip state
+      const cardInner = document.getElementById('flashcard-inner');
+      cardInner.classList.remove('flipped');
+      
+      // Apply Front Data
+      document.getElementById('card-word-text').textContent = currentWord.word;
+      document.getElementById('card-chapter-tag-front').textContent = currentWord.chapter;
+      
+      // Apply Back Data
+      document.getElementById('card-meaning-text').textContent = currentWord.meaning;
+      document.getElementById('card-chapter-tag-back').textContent = currentWord.chapter;
+      
+      if (currentWord.context) {
+        let highlightedContext = currentWord.context;
+        const escWord = currentWord.word.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&');
+        const regex = new RegExp(`(${escWord}\\w*)`, 'gi');
+        highlightedContext = highlightedContext.replace(regex, `<strong>$1</strong>`);
+        document.getElementById('card-context-text').innerHTML = highlightedContext.replace(/\n/g, '<br>');
+        document.getElementById('card-context-text').style.display = 'block';
+      } else {
+        document.getElementById('card-context-text').style.display = 'none';
+      }
+      
+      // Auto voice on load
+      speakWord(currentWord.word);
+    }
+    
+    function flipCard() {
+      const cardInner = document.getElementById('flashcard-inner');
+      cardInner.classList.toggle('flipped');
+    }
+    
+    function cardAction(knowIt) {
+      const currentWord = sessionWords[currentQuestionIndex];
+      
+      // Log the card result
+      answersLog.push({
+        wordObj: currentWord,
+        isCorrect: knowIt,
+        userAnswer: knowIt ? '알고 있음' : '모름'
+      });
+      
+      if (knowIt) {
+        sessionScore++;
+      }
+      
+      currentQuestionIndex++;
+      loadFlashcard();
+    }
+    
+    // --- Summary & Score Report ---
+    function finishSession() {
+      switchView('summary');
+      
+      const total = sessionWords.length;
+      const score = sessionScore;
+      const percentage = total > 0 ? Math.round((score / total) * 100) : 0;
+      
+      document.getElementById('summary-percentage').textContent = `${percentage}%`;
+      document.getElementById('summary-fraction').textContent = `${score} / ${total}`;
+      
+      // Animate score SVG path
+      const strokeCircle = document.getElementById('summary-score-stroke');
+      const offset = 440 - (440 * percentage) / 100;
+      strokeCircle.style.strokeDashoffset = offset;
+      
+      // Select appropriate cheering comment
+      let comment = '대단해요! 완벽한 영어 마스터입니다! 🎉';
+      if (percentage >= 90) {
+        comment = '대단해요! 완벽에 가까운 점수입니다! 🌟';
+      } else if (percentage >= 70) {
+        comment = '참 잘하셨습니다! 조금만 더 하면 백점이에요! 👍';
+      } else if (percentage >= 40) {
+        comment = '수고하셨습니다. 복습을 통해 완벽히 익혀보세요!';
+      } else {
+        comment = '다시 한 번 도전해보세요. 단어들이 기다리고 있어요! 💪';
+      }
+      document.getElementById('summary-comment').textContent = comment;
+      
+      // Disable "review failed" button if score is 100%
+      const failedBtn = document.getElementById('summary-retry-failed-btn');
+      if (score === total) {
+        failedBtn.disabled = true;
+        failedBtn.style.opacity = 0.5;
+        failedBtn.style.cursor = 'not-allowed';
+      } else {
+        failedBtn.disabled = false;
+        failedBtn.style.opacity = 1;
+        failedBtn.style.cursor = 'pointer';
+      }
+      
+      // Generate review table
+      const listContainer = document.getElementById('summary-review-list');
+      listContainer.innerHTML = '';
+      
+      answersLog.forEach(log => {
+        const item = document.createElement('div');
+        item.className = log.isCorrect ? 'review-list-item correct' : 'review-list-item incorrect';
+        
+        item.innerHTML = `
+          <div class="review-word-info">
+            <span class="review-english">${log.wordObj.word}</span>
+            <span class="review-korean">${log.wordObj.meaning}</span>
+          </div>
+          <div>
+            <span class="review-user-answer">${log.userAnswer}</span>
+          </div>
+        `;
+        listContainer.appendChild(item);
+      });
+    }
+    
+    function restartSession() {
+      // Shuffle same words and start again
+      sessionWords = shuffleArray(sessionWords);
+      currentQuestionIndex = 0;
+      sessionScore = 0;
+      answersLog = [];
+      
+      if (currentConfig.studyMode === 'quiz') {
+        switchView('quiz');
+        loadQuizQuestion();
+      } else {
+        switchView('flashcard');
+        loadFlashcard();
+      }
+    }
+    
+    function reviewFailedOnly() {
+      // Find incorrect words in log
+      const failedPool = answersLog.filter(log => !log.isCorrect).map(log => log.wordObj);
+      if (failedPool.length === 0) return;
+      
+      sessionWords = shuffleArray(failedPool);
+      currentQuestionIndex = 0;
+      sessionScore = 0;
+      answersLog = [];
+      
+      if (currentConfig.studyMode === 'quiz') {
+        switchView('quiz');
+        loadQuizQuestion();
+      } else {
+        switchView('flashcard');
+        loadFlashcard();
+      }
+    }
+    
+    // --- Vocabulary Dictionary Tab Logics ---
+    function refreshDictionaryTab() {
+      dictFilteredWords = [...vocabulary];
+      dictCurrentPage = 1;
+      
+      // Apply filters
+      applyDictFilters();
+    }
+    
+    function applyDictFilters() {
+      const query = document.getElementById('dict-search-input').value.toLowerCase().trim();
+      const chapter = document.getElementById('dict-chapter-select').value;
+      
+      dictFilteredWords = vocabulary.filter(item => {
+        // Starred condition
+        if (dictShowStarredOnly && !starredWords.has(item.word)) return false;
+        
+        // Chapter condition
+        if (chapter !== 'all' && item.chapter !== chapter) return false;
+        
+        // Search text condition
+        if (query) {
+          const matchWord = item.word.toLowerCase().includes(query);
+          const matchMeaning = item.meaning.toLowerCase().includes(query);
+          const matchContext = item.context ? item.context.toLowerCase().includes(query) : false;
+          return matchWord || matchMeaning || matchContext;
+        }
+        
+        return true;
+      });
+      
+      dictCurrentPage = 1;
+      renderDictGrid();
+    }
+    
+    // Bind search and select listeners
+    document.getElementById('dict-search-input').addEventListener('input', applyDictFilters);
+    document.getElementById('dict-chapter-select').addEventListener('change', applyDictFilters);
+    
+    function toggleDictStarredFilter() {
+      dictShowStarredOnly = !dictShowStarredOnly;
+      const btn = document.getElementById('dict-starred-toggle');
+      if (dictShowStarredOnly) {
+        btn.classList.add('active');
+        btn.innerHTML = '★ 북마크 보는 중';
+      } else {
+        btn.classList.remove('active');
+        btn.innerHTML = '☆ 북마크만 보기';
+      }
+      applyDictFilters();
+    }
+    
+    function renderDictGrid() {
+      const container = document.getElementById('dict-grid-container');
+      container.innerHTML = '';
+      
+      const totalItems = dictFilteredWords.length;
+      const totalPages = Math.max(Math.ceil(totalItems / DICT_ITEMS_PER_PAGE), 1);
+      
+      // Handle page bounds
+      if (dictCurrentPage > totalPages) dictCurrentPage = totalPages;
+      if (dictCurrentPage < 1) dictCurrentPage = 1;
+      
+      // Pagination display
+      document.getElementById('dict-page-info').textContent = `페이지 ${dictCurrentPage} / ${totalPages}`;
+      document.getElementById('dict-prev-page').disabled = dictCurrentPage === 1;
+      document.getElementById('dict-next-page').disabled = dictCurrentPage === totalPages;
+      
+      if (totalItems === 0) {
+        container.innerHTML = `
+          <div style="grid-column: 1 / -1; text-align: center; padding: 40px; color: var(--text-secondary);">
+            검색 결과에 맞는 단어가 없습니다.
+          </div>
+        `;
+        return;
+      }
+      
+      const startIdx = (dictCurrentPage - 1) * DICT_ITEMS_PER_PAGE;
+      const pageItems = dictFilteredWords.slice(startIdx, startIdx + DICT_ITEMS_PER_PAGE);
+      
+      pageItems.forEach(item => {
+        const isStarred = starredWords.has(item.word);
+        const card = document.createElement('div');
+        card.className = 'dict-card';
+        
+        // Format Context with highlighted word
+        let contextHTML = '';
+        if (item.context) {
+          let cleanCtx = item.context;
+          const escWord = item.word.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&');
+          const regex = new RegExp(`(${escWord}\\w*)`, 'gi');
+          cleanCtx = cleanCtx.replace(regex, `<strong>$1</strong>`);
+          contextHTML = `<div class="dict-context">${cleanCtx.replace(/\n/g, '<br>')}</div>`;
+        }
+        
+        card.innerHTML = `
+          <div class="dict-card-header">
+            <h3 class="dict-english">${item.word}</h3>
+          </div>
+          <div class="dict-korean">${item.meaning}</div>
+          ${contextHTML}
+          <span class="dict-chapter-tag">${item.chapter}</span>
+          <div class="dict-actions">
+            <button type="button" class="dict-action-btn" onclick="speakWord('${item.word.replace(/'/g, "\\'")}')" title="발음 듣기" aria-label="발음 듣기">🔊</button>
+            <button type="button" class="dict-action-btn ${isStarred ? 'starred' : ''}" onclick="toggleStarred('${item.word.replace(/'/g, "\\'")}', this)" title="북마크" aria-label="북마크 추가">⭐</button>
+          </div>
+        `;
+        
+        container.appendChild(card);
+      });
+    }
+    
+    function changePage(direction) {
+      dictCurrentPage += direction;
+      renderDictGrid();
+      // Scroll list back to top
+      document.getElementById('dict-grid-container').scrollIntoView({ behavior: 'smooth' });
+    }
+    
+    function refreshDictFilteredList() {
+      // Re-apply filters without resetting page if possible
+      const query = document.getElementById('dict-search-input').value.toLowerCase().trim();
+      const chapter = document.getElementById('dict-chapter-select').value;
+      
+      dictFilteredWords = vocabulary.filter(item => {
+        if (dictShowStarredOnly && !starredWords.has(item.word)) return false;
+        if (chapter !== 'all' && item.chapter !== chapter) return false;
+        if (query) {
+          const matchWord = item.word.toLowerCase().includes(query);
+          const matchMeaning = item.meaning.toLowerCase().includes(query);
+          return matchWord || matchMeaning;
+        }
+        return true;
+      });
+      renderDictGrid();
+    }
+    
+    // --- Helper Utilities ---
+    function shuffleArray(array) {
+      const arr = [...array];
+      for (let i = arr.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [arr[i], arr[j]] = [arr[j], arr[i]];
+      }
+      return arr;
+    }
+    
+    // --- Initial Entry Point ---
+    window.addEventListener('DOMContentLoaded', () => {
+      initializeChapters();
+      updateStarredBadges();
+    });
+  </script>
+</body>
+</html>
